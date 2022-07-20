@@ -1,0 +1,8 @@
+query FirstQuery {
+
+    characters{
+        results{
+            name
+        }
+    }
+}
