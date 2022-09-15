@@ -1,13 +1,13 @@
 package retrofit;
 
-import model.RespustaAPI;
+import model.RespuestaAPI;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface FootballApi {
 
     @GET("leagues")
-    Call<RespustaAPI> getTeams();
+    Call<RespuestaAPI> getTeams();
 
 }
 

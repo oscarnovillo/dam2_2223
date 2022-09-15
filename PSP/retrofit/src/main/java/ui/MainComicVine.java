@@ -1,0 +1,91 @@
+package ui;
+
+import com.google.gson.*;
+import com.squareup.moshi.Moshi;
+import model.RespuestaAPI;
+import model.jokes.ResponseJoke;
+import okhttp3.OkHttpClient;
+import okhttp3.Protocol;
+import okhttp3.Request;
+import retrofit.FootballApi;
+import retrofit.JokeApi;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.moshi.MoshiConverterFactory;
+
+import java.io.IOException;
+import java.time.LocalDateTime;
+
+public class MainComicVine {
+
+
+    public static void main(String[] args) throws IOException {
+        //bc2576d758d70ff8cb4844883583233fddbf5339
+       // Moshi moshi = new Moshi.Builder().build();
+
+        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class,
+                (JsonDeserializer<LocalDateTime>) (json, type, jsonDeserializationContext) -> LocalDateTime.parse(json.getAsJsonPrimitive().getAsString())).registerTypeAdapter(LocalDateTime.class,
+                (JsonSerializer<LocalDateTime>) (localDateTime, type, jsonSerializationContext) -> new JsonPrimitive(localDateTime.toString())
+        ).create();
+
+
+
+        OkHttpClient clientOK = new OkHttpClient.Builder()
+                .connectionPool(new okhttp3.ConnectionPool(0, 1, java.util.concurrent.TimeUnit.NANOSECONDS))
+                .protocols(java.util.Arrays.asList(Protocol.HTTP_1_1,Protocol.HTTP_2)).build();
+
+
+        System.out.println(clientOK.newCall(new Request.Builder().url("https://v2.jokeapi.dev/joke/Any?lang=es").build()).execute().body().string());
+
+//    enqueue(new okhttp3.Callback() {
+//            @Override
+//            public void onFailure(okhttp3.Call call, IOException e) {
+//                System.out.println("Error");
+//            }
+//
+//            @Override
+//            public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
+//                System.out.println(response.body().string());
+//            }
+//        });
+
+        Retrofit retro = new Retrofit.Builder()
+                .baseUrl("https://v2.jokeapi.dev/joke/")
+                //.addConverterFactory(MoshiConverterFactory.create(moshi))
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(clientOK)
+                .build();
+
+        JokeApi jokes =  retro.create(JokeApi.class);
+
+        Response<ResponseJoke> r = jokes.getAnyJoke("es").execute();
+
+
+        System.out.println(r.body());
+
+//                .enqueue(new Callback<ResponseJoke>() {
+//            @Override
+//            public void onResponse(Call<ResponseJoke> call, Response<ResponseJoke> response) {
+//                System.out.println(response.body());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseJoke> call, Throwable throwable) {
+//                System.out.println(throwable);
+//            }
+//        });
+
+//        if (r.isSuccessful())
+//        {
+//            System.out.println(r.body());
+//        }
+
+        System.out.println(clientOK.connectionPool().connectionCount());
+
+    }
+
+
+}

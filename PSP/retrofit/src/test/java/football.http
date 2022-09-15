@@ -1,0 +1,5 @@
+GET https://api-football-standings.azharimm.site/leagues
+Accept: application/json
+Protocol-Request: HTTP/2.0
+
+###
