@@ -24,7 +24,8 @@ public class MainComicVine {
 
     public static void main(String[] args) throws IOException {
         //bc2576d758d70ff8cb4844883583233fddbf5339
-       // Moshi moshi = new Moshi.Builder().build();
+        //https://comicvine.gamespot.com/api
+        Moshi moshi = new Moshi.Builder().build();
 
         Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class,
                 (JsonDeserializer<LocalDateTime>) (json, type, jsonDeserializationContext) -> LocalDateTime.parse(json.getAsJsonPrimitive().getAsString())).registerTypeAdapter(LocalDateTime.class,
@@ -34,8 +35,9 @@ public class MainComicVine {
 
 
         OkHttpClient clientOK = new OkHttpClient.Builder()
-                .connectionPool(new okhttp3.ConnectionPool(0, 1, java.util.concurrent.TimeUnit.NANOSECONDS))
-                .protocols(java.util.Arrays.asList(Protocol.HTTP_1_1,Protocol.HTTP_2)).build();
+                .connectionPool(new okhttp3.ConnectionPool(1, 2, java.util.concurrent.TimeUnit.SECONDS))
+                //.protocols(java.util.Arrays.asList(Protocol.HTTP_2))
+                .build();
 
 
         System.out.println(clientOK.newCall(new Request.Builder().url("https://v2.jokeapi.dev/joke/Any?lang=es").build()).execute().body().string());
@@ -54,8 +56,8 @@ public class MainComicVine {
 
         Retrofit retro = new Retrofit.Builder()
                 .baseUrl("https://v2.jokeapi.dev/joke/")
-                //.addConverterFactory(MoshiConverterFactory.create(moshi))
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(MoshiConverterFactory.create(moshi))
+                //.addConverterFactory(GsonConverterFactory.create(gson))
                 .client(clientOK)
                 .build();
 
