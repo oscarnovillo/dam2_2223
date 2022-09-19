@@ -2,6 +2,7 @@ package model.jokes;
 
 import lombok.Data;
 
+
 @Data
 public class ResponseJoke{
 	private final Flags flags;

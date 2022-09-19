@@ -35,12 +35,16 @@ public class MainComicVine {
 
 
         OkHttpClient clientOK = new OkHttpClient.Builder()
-                .connectionPool(new okhttp3.ConnectionPool(1, 2, java.util.concurrent.TimeUnit.SECONDS))
-                //.protocols(java.util.Arrays.asList(Protocol.HTTP_2))
+                .connectionPool(new okhttp3.ConnectionPool(1, 1, java.util.concurrent.TimeUnit.SECONDS))
+                //.protocols(java.util.Arrays.asList(Protocol.HTTP_2,Protocol.H2_PRIOR_KNOWLEDGE))
                 .build();
 
 
-        System.out.println(clientOK.newCall(new Request.Builder().url("https://v2.jokeapi.dev/joke/Any?lang=es").build()).execute().body().string());
+        System.out.println(clientOK
+                .newCall(
+                        new Request.Builder()
+                                .url("https://v2.jokeapi.dev/joke/Any?lang=es").build())
+                .execute().body().string());
 
 //    enqueue(new okhttp3.Callback() {
 //            @Override
@@ -85,7 +89,7 @@ public class MainComicVine {
 //            System.out.println(r.body());
 //        }
 
-        System.out.println(clientOK.connectionPool().connectionCount());
+       // System.out.println(clientOK.connectionPool().connectionCount());
 
     }
 
