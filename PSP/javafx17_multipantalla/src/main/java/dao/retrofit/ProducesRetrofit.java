@@ -22,6 +22,7 @@ public class ProducesRetrofit {
     @Singleton
     public Moshi getMoshi()
     {
+        
         return new Moshi.Builder().build();
     }
 

@@ -17,6 +17,7 @@ module javafx11.multipantalla {
     requires com.squareup.moshi;
     requires okhttp3;
 
+
     exports ui.main to javafx.graphics;
     exports ui.pantallas.principal;
     exports ui.pantallas.pantallaNueva;
