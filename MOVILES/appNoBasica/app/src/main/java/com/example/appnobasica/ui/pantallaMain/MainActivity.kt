@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.appnobasica.databinding.ActivityMainBinding
+import com.example.appnobasica.domain.modelo.Persona
 import com.example.appnobasica.domain.usecases.personas.AddPersona
 import com.example.appnobasica.domain.usecases.personas.GetPersonas
 import com.example.appnobasica.utils.StringProvider
@@ -26,23 +27,31 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        with(binding) {
+        binding = ActivityMainBinding.inflate(layoutInflater).apply {
+            setContentView(root)
             editTextTextPersonName.setText("Hola")
-        }
-
-        viewModel.uiState.observe(this) { state ->
-            state.error?.let {
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-                viewModel.errorMostrado()
+            button.setOnClickListener {
+                viewModel.addPersona(Persona(editTextTextPersonName.text.toString()))
             }
-            if (state.error == null)
-                binding.editTextTextPersonName.setText(state.persona.nombre)
 
+            viewModel.uiState.observe(this@MainActivity) { state ->
+                state.error?.let {
+                    Toast.makeText(this@MainActivity, it, Toast.LENGTH_SHORT).show()
+                    viewModel.errorMostrado()
+                }
+                if (state.error == null)
+                    editTextTextPersonName.setText(state.persona.nombre)
+
+
+            }
         }
+
+
+
+
+
 
 
     }
+
 }

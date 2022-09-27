@@ -11,7 +11,7 @@ import com.example.appnobasica.domain.usecases.personas.GetPersonas
 import com.example.appnobasica.utils.StringProvider
 
 class MainViewModel(
-    private val stringProvider : StringProvider,
+    private val stringProvider: StringProvider,
     private val addPersona: AddPersona,
     private val getPersonas: GetPersonas,
 ) : ViewModel() {
@@ -19,16 +19,25 @@ class MainViewModel(
     private val _uiState = MutableLiveData<MainState>()
     val uiState: LiveData<MainState> get() = _uiState
 
-    fun addPersona(persona: Persona) = addPersona.invoke(persona)
 
-    fun getPersonas(id: Int) {
+    fun addPersona(persona: Persona) {
+
+        if (!addPersona.invoke(persona)) {
+            _uiState.value = MainState(
+                error = "error",
+            )
+            _uiState.value = _uiState.value?.copy(error = "error")
+
+        }
+    }
+
+    fun getPersonas(id: Int){
         val personas = getPersonas.invoke()
 
         if (personas.size < id || id < 0) {
             _uiState.value = _uiState.value?.copy(error = "error")
 
-        }
-        else
+        } else
             _uiState.value = _uiState.value?.copy(persona = personas[id])
 
 
@@ -45,7 +54,7 @@ class MainViewModel(
  * Factory class to instantiate the [ViewModel] instance.
  */
 class MainViewModelFactory(
-    private val stringProvider : StringProvider,
+    private val stringProvider: StringProvider,
     private val addPersona: AddPersona,
     private val getPersonas: GetPersonas,
 

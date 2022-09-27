@@ -5,8 +5,7 @@ import com.example.appnobasica.domain.modelo.Persona
 
 class AddPersona {
 
-    fun invoke(persona: Persona) {
-        val personaRepository = Repository.createSingleton()
-        personaRepository.addPersona(persona)
-    }
+    fun invoke(persona: Persona) =
+        Repository.getInstance().addPersona(persona)
+
 }
