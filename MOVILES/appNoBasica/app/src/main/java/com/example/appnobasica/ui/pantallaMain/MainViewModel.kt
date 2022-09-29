@@ -24,9 +24,9 @@ class MainViewModel(
 
         if (!addPersona.invoke(persona)) {
             _uiState.value = MainState(
-                error = "error",
+                error = stringProvider.getString(R.string.name),
             )
-            _uiState.value = _uiState.value?.copy(error = "error")
+            _uiState.value = _uiState.value?.copy(error = Constantes.ERROR)
 
         }
     }
