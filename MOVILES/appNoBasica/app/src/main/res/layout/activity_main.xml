@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:drawableEnd="@android:drawable/arrow_down_float"
         android:ems="10"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
+
         android:hint="@string/name"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/textView"

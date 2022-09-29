@@ -24,3 +24,7 @@ F
 Kapp/src/androidTest/java/com/example/appnobasica/ExampleInstrumentedTest.kt,a\6\a6a3368cbc8896c948d40a4edb32ff718a8f25ad
 l
 <app/src/test/java/com/example/appnobasica/ExampleUnitTest.kt,e\7\e7fd4a484a85c6ab51c8c97f3e8c049b656dcb4d
+y
+Iapp/src/main/java/com/example/appnobasica/ui/pantallaMain/MainActivity.kt,f\2\f26b2ca94493b4461e66a467663cc127662061b9
+z
+Japp/src/main/java/com/example/appnobasica/ui/pantallaMain/MainViewModel.kt,c\e\ce7977ca063a16ccb821816dd08090fe2ccfc3b7
