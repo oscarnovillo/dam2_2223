@@ -2,16 +2,19 @@ package dao.impl;
 
 import common.config.Configuracion;
 import dao.DaoCromos;
+import dao.retrofit.ProducesRetrofit;
 import dao.retrofit.llamadas.JokeApi;
 import dao.retrofit.modelo.ResponseJoke;
 import domain.modelo.Cromo;
 import domain.modelo.MiJokes;
 import io.vavr.control.Either;
+import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DaoCromosImpl implements DaoCromos {
@@ -20,10 +23,12 @@ public class DaoCromosImpl implements DaoCromos {
 
     private JokeApi jokeApi;
 
+
     @Inject
     public DaoCromosImpl(Configuracion configuracion, JokeApi jokeApi) {
         this.configuracion = configuracion;
         this.jokeApi = jokeApi;
+
     }
 
     @Override
@@ -36,6 +41,8 @@ public class DaoCromosImpl implements DaoCromos {
     }
 
     public Either<String,MiJokes> llamadaRettrofit() {
+
+
 
         Either<String,MiJokes> respuesta = null;
 
