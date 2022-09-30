@@ -54,11 +54,11 @@ public class ListadoViewModel {
 //        else
 //            ls = new ListadoState(cromos.get(), null);
 
-        cromos.peek(mijoke -> {
-            //_state.setValue(new ListadoState(mijoke, null));
-        }).peekLeft(error -> {
-            _state.setValue(new ListadoState(null, error));
-        });
+//        cromos.peek(mijoke -> {
+//            //_state.setValue(new ListadoState(mijoke, null));
+//        }).peekLeft(error -> {
+//            _state.setValue(new ListadoState(null, error));
+//        });
 
     }
 

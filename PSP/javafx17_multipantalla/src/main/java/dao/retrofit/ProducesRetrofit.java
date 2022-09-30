@@ -105,12 +105,14 @@ public class ProducesRetrofit {
     }
 
     @Produces
-    public JokeApi getJokeApi(@Named("asdasd") Retrofit retrofit){
+    @Named("uno")
+    public JokeApi getJokeApi(@Named("Cantantes") Retrofit retrofit){
         return retrofit.create(JokeApi.class);
     }
 
 
     @Produces
+    @Named("dos")
     public JokeApi getPelisApi(@Named("Pelis") Retrofit retrofit){
         return retrofit.create(JokeApi.class);
     }

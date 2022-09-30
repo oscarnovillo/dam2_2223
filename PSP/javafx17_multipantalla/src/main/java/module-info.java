@@ -9,6 +9,7 @@ module javafx11.multipantalla {
     requires lombok;
     requires org.apache.logging.log4j;
 
+
     requires jakarta.inject;
     requires jakarta.cdi;
     requires retrofit2;
@@ -30,6 +31,7 @@ module javafx11.multipantalla {
     exports common;
     exports dao.impl;
     exports domain.usecases;
+    exports dao.retrofit;
 
 //    opens ui.pantallas.principal to javafx.fxml;
     opens ui.pantallas.pantalla1 to javafx.fxml;
@@ -39,6 +41,8 @@ module javafx11.multipantalla {
     opens ui.pantallas.detalle to  javafx.fxml;
 
     opens domain.modelo to javafx.base;
+
+    opens dao.retrofit.modelo;
     opens ui.pantallas.principal;
     opens ui.main;
     opens config;

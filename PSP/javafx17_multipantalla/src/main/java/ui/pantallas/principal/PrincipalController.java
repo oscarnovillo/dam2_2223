@@ -51,7 +51,7 @@ public class PrincipalController {
     public Cromo getActualCromo(){return cromoSeleccionado;}
 
     @FXML
-    private BorderPane root;
+    public BorderPane root;
 
 
     private Alert alert;
@@ -179,7 +179,7 @@ public class PrincipalController {
 
     public void initialize() {
         menuPrincipal.setVisible(false);
-        cargarPantalla(Pantallas.LOGIN);
+        cargarPantalla(Pantallas.LISTADO);
 
     }
 

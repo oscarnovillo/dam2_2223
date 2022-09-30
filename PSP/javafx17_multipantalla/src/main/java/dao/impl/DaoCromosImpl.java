@@ -10,6 +10,7 @@ import domain.modelo.MiJokes;
 import io.vavr.control.Either;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -25,7 +26,7 @@ public class DaoCromosImpl implements DaoCromos {
 
 
     @Inject
-    public DaoCromosImpl(Configuracion configuracion, JokeApi jokeApi) {
+    public DaoCromosImpl(Configuracion configuracion, @Named("uno") JokeApi jokeApi) {
         this.configuracion = configuracion;
         this.jokeApi = jokeApi;
 
@@ -46,9 +47,15 @@ public class DaoCromosImpl implements DaoCromos {
 
         Either<String,MiJokes> respuesta = null;
 
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+
+        }
+
         Response<ResponseJoke> r = null;
         try {
-            r = jokeApi.getAnyJoke("AÇ(=(JKSDFL SDLFJ","es").execute();
+            r = jokeApi.getAnyJoke("aa","es").execute();
 
             if (r.isSuccessful()) {
                 ResponseJoke rj = r.body();

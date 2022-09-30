@@ -8,8 +8,10 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import jakarta.inject.Inject;
 import javafx.collections.ListChangeListener;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -44,8 +46,28 @@ public class ListadoController extends BasePantallaController {
     @FXML
     private void ver(ActionEvent actionEvent) {
 //        getPrincipalController().cargarPantalla(Pantallas.DETALLE);
-        tabla.getSelectionModel().getSelection().values().stream().findFirst()
-                .ifPresent(cromo -> getPrincipalController().onSeleccionCromo(cromo));
+//        tabla.getSelectionModel().getSelection().values().stream().findFirst()
+//                .ifPresent(cromo -> getPrincipalController().onSeleccionCromo(cromo));
+        getPrincipalController().root.setCursor(Cursor.WAIT);
+        var task = new Task<Cromo>() {
+            @Override
+            protected Cromo call() throws Exception {
+                viewModel.llamadaRetrofit();
+                return new Cromo("",0,"");
+            }
+        };
+        task.setOnSucceeded(workerStateEvent -> {
+            getPrincipalController().root.setCursor(Cursor.DEFAULT);
+            //getprincipalController.getPantallaPrincipal().setCursor(Cursor.DEFAULT);
+        });
+        task.setOnFailed(workerStateEvent -> {
+            getPrincipalController().root.setCursor(Cursor.DEFAULT);
+            //getprincipalController.getPantallaPrincipal().setCursor(Cursor.DEFAULT);
+        });
+
+        new Thread(task).start();
+
+
 
 
     }
