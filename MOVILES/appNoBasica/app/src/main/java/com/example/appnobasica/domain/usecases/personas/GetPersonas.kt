@@ -4,5 +4,5 @@ import com.example.appnobasica.data.Repository
 
 class GetPersonas {
 
-    fun invoke() = Repository.getInstance().getPersonas()
+    operator fun invoke() = Repository.getInstance().getPersonas()
 }

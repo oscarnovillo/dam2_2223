@@ -6,13 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.appnobasica.R
 import com.example.appnobasica.domain.modelo.Persona
-import com.example.appnobasica.domain.usecases.personas.AddPersona
+import com.example.appnobasica.domain.usecases.personas.AddPersonaUseCase
 import com.example.appnobasica.domain.usecases.personas.GetPersonas
 import com.example.appnobasica.utils.StringProvider
 
 class MainViewModel(
     private val stringProvider: StringProvider,
-    private val addPersona: AddPersona,
+    private val addPersonaUseCase: AddPersonaUseCase,
     private val getPersonas: GetPersonas,
 ) : ViewModel() {
 
@@ -22,7 +22,7 @@ class MainViewModel(
 
     fun addPersona(persona: Persona) {
 
-        if (!addPersona.invoke(persona)) {
+        if (!addPersonaUseCase(persona)) {
             _uiState.value = MainState(
                 error = stringProvider.getString(R.string.name),
             )
@@ -32,7 +32,7 @@ class MainViewModel(
     }
 
     fun getPersonas(id: Int){
-        val personas = getPersonas.invoke()
+        val personas = getPersonas()
 
         if (personas.size < id || id < 0) {
             _uiState.value = _uiState.value?.copy(error = "error")
@@ -55,7 +55,7 @@ class MainViewModel(
  */
 class MainViewModelFactory(
     private val stringProvider: StringProvider,
-    private val addPersona: AddPersona,
+    private val addPersona: AddPersonaUseCase,
     private val getPersonas: GetPersonas,
 
     ) : ViewModelProvider.Factory {
