@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.appnobasica.R
 import com.example.appnobasica.domain.modelo.Persona
-import com.example.appnobasica.domain.usecases.personas.AddPersona
+import com.example.appnobasica.domain.usecases.personas.AddPersonaUseCase
 import com.example.appnobasica.domain.usecases.personas.GetPersonas
 import com.example.appnobasica.utils.StringProvider
 
@@ -31,7 +31,7 @@ class MainViewModel(
         }
     }
 
-    fun getPersonas(id: Int){
+    fun getPersonas(id: Int) {
         val personas = getPersonas()
 
         if (personas.size < id || id < 0) {
@@ -55,7 +55,7 @@ class MainViewModel(
  */
 class MainViewModelFactory(
     private val stringProvider: StringProvider,
-    private val addPersona: AddPersona,
+    private val addPersona: AddPersonaUseCase,
     private val getPersonas: GetPersonas,
 
     ) : ViewModelProvider.Factory {
