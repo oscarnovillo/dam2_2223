@@ -12,29 +12,27 @@ import com.example.appnobasica.utils.StringProvider
 
 class MainViewModel(
     private val stringProvider: StringProvider,
-    private val addPersonaUseCase: AddPersona,
+    private val addPersonaUseCase: AddPersonaUseCase,
     private val getPersonas: GetPersonas,
 ) : ViewModel() {
 
-    private val _uiState = MutableLiveData(MainState())
+    private val _uiState = MutableLiveData<MainState>()
     val uiState: LiveData<MainState> get() = _uiState
-
-
 
 
     fun addPersona(persona: Persona) {
 
-
         if (!addPersonaUseCase(persona)) {
-            _uiState.value = MainState(error = stringProvider.getString(R.string.name),)
-
+            _uiState.value = MainState(
+                error = stringProvider.getString(R.string.name),
+            )
             _uiState.value = _uiState.value?.copy(error = Constantes.ERROR)
 
         }
     }
 
     fun getPersonas(id: Int){
-        val personas = getPersonas.invoke()
+        val personas = getPersonas()
 
         if (personas.size < id || id < 0) {
             _uiState.value = _uiState.value?.copy(error = "error")

@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.appnobasica.databinding.ActivityMainBinding
 import com.example.appnobasica.domain.modelo.Persona
-import com.example.appnobasica.domain.usecases.personas.AddPersona
+import com.example.appnobasica.domain.usecases.personas.AddPersonaUseCase
 import com.example.appnobasica.domain.usecases.personas.GetPersonas
 import com.example.appnobasica.utils.StringProvider
 
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels {
         MainViewModelFactory(
             StringProvider.instance(this),
-            AddPersona(),
+            AddPersonaUseCase(),
             GetPersonas(),
         )
     }

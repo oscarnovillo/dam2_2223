@@ -21,12 +21,12 @@ public class ProducesRetrofit {
     @Singleton
     public Moshi getMoshi()
     {
-        
+
         return new Moshi.Builder().build();
     }
 
     @Produces
-    @Named("Cantantes")
+    @Cantante
     @Singleton
     public Retrofit retrofits(Moshi moshi, Configuracion config ) {
 
@@ -106,7 +106,7 @@ public class ProducesRetrofit {
 
     @Produces
     @Named("uno")
-    public JokeApi getJokeApi(@Named("Cantantes") Retrofit retrofit){
+    public JokeApi getJokeApi(@Cantante Retrofit retrofit){
         return retrofit.create(JokeApi.class);
     }
 
