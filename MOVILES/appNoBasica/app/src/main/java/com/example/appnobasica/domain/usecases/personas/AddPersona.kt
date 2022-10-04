@@ -6,7 +6,7 @@ import com.example.appnobasica.domain.modelo.Persona
 
 class AddPersona {
 
-    fun invoke(persona: Persona) =
+    operator fun invoke(persona: Persona) =
         RespositoryDos.addPersona(persona)
 
 }
