@@ -11,6 +11,7 @@ import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 
 import java.time.LocalDateTime;
@@ -58,6 +59,7 @@ public class ProducesRetrofit {
                 .baseUrl("https://v2.jokeapi.dev/joke/")
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 //.addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .client(clientOK)
                 .build();
 

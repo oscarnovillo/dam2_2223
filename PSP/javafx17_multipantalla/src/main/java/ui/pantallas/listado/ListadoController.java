@@ -6,7 +6,11 @@ import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.MFXTableView;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.vavr.control.Either;
 import jakarta.inject.Inject;
+import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -15,9 +19,11 @@ import javafx.scene.Cursor;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+//import org.pdfsam.rxjavafx.schedulers.JavaFxScheduler;
 import ui.pantallas.common.BasePantallaController;
 
 import java.util.Comparator;
+import java.util.List;
 
 public class ListadoController extends BasePantallaController {
 
@@ -45,31 +51,67 @@ public class ListadoController extends BasePantallaController {
 
     @FXML
     private void ver(ActionEvent actionEvent) {
-//        getPrincipalController().cargarPantalla(Pantallas.DETALLE);
-//        tabla.getSelectionModel().getSelection().values().stream().findFirst()
-//                .ifPresent(cromo -> getPrincipalController().onSeleccionCromo(cromo));
+//        asyncConTask();
+//        //getPrincipalController().sacarAlertError("ahora con single");
+//        asynConSingle();
+
         getPrincipalController().root.setCursor(Cursor.WAIT);
-        var task = new Task<Cromo>() {
+        viewModel.llamadaRetrofitAsyncEnViewModel();
+
+    }
+
+    private void asynConSingle() {
+        Single.fromCallable(viewModel::llamadaRetrofitAsyncEnUi)
+                .subscribeOn(Schedulers.io())
+                //.observeOn(JavaFxScheduler.platform())
+                .doFinally(() -> getPrincipalController().root.setCursor(Cursor.DEFAULT))
+                .subscribe(result ->
+                                result.peek(cromos -> {
+                                            tabla.getItems().clear();
+                                            tabla.getItems().addAll(cromos);
+                                        })
+                                        .peekLeft(error -> {
+                                            getPrincipalController().sacarAlertError(error);
+                                        }),
+                        throwable -> {
+                            getPrincipalController().sacarAlertError(throwable.getMessage());
+
+                        });
+
+
+        getPrincipalController().root.setCursor(Cursor.WAIT);
+    }
+
+
+    private void asyncConTask() {
+
+        getPrincipalController().root.setCursor(Cursor.WAIT);
+        var task = new Task<Either<String, List<Cromo>>>() {
             @Override
-            protected Cromo call() throws Exception {
-                viewModel.llamadaRetrofit();
-                return new Cromo("",0,"");
+            protected Either<String, List<Cromo>> call() throws Exception {
+                return viewModel.llamadaRetrofitAsyncEnUi();
             }
         };
         task.setOnSucceeded(workerStateEvent -> {
+            //workerStateEvent.getSource().valueProperty().get()
             getPrincipalController().root.setCursor(Cursor.DEFAULT);
-            //getprincipalController.getPantallaPrincipal().setCursor(Cursor.DEFAULT);
+            var result = task.getValue();
+            result.peek(cromos -> {
+                tabla.getItems().clear();
+                tabla.getItems().addAll(cromos);
+
+
+            }).peekLeft(error -> {
+                getPrincipalController().sacarAlertError(error);
+            });
         });
         task.setOnFailed(workerStateEvent -> {
+            //workerStateEvent.getSource().getException().getMessage()
+            getPrincipalController().sacarAlertError(task.getException().getMessage());
             getPrincipalController().root.setCursor(Cursor.DEFAULT);
-            //getprincipalController.getPantallaPrincipal().setCursor(Cursor.DEFAULT);
         });
 
         new Thread(task).start();
-
-
-
-
     }
 
     public void initialize() {
@@ -98,8 +140,14 @@ public class ListadoController extends BasePantallaController {
         tabla.getTableColumns().addAll(collecionColumn, descriptionColumn, numberColumn);
 
         cambiosEstado();
-        viewModel.loadCromos();
+
         // tabla.setItems(viewModel.getState().get().getPersonas());
+    }
+
+
+    @Override
+    public void principalCargado() {
+        viewModel.loadCromos();
     }
 
     private void cambiosEstado() {
@@ -108,11 +156,15 @@ public class ListadoController extends BasePantallaController {
                 getPrincipalController().sacarAlertError(listadoStateNew.getError());
             }
             if (listadoStateNew.getCromos() != null) {
-                tabla.getItems().clear();
-                tabla.getItems().addAll(listadoStateNew.getCromos());
-                tablaNormal.getItems().clear();
-                tablaNormal.getItems().addAll(listadoStateNew.getCromos());
-
+                Platform.runLater(() -> {
+                    tabla.getItems().clear();
+                    tabla.getItems().addAll(listadoStateNew.getCromos());
+                    tabla.getItems().clear();
+                    tabla.getItems().addAll(listadoStateNew.getCromos());
+                    tablaNormal.getItems().clear();
+                    tablaNormal.getItems().addAll(listadoStateNew.getCromos());
+                    getPrincipalController().root.setCursor(Cursor.DEFAULT);
+                });
 
             }
 

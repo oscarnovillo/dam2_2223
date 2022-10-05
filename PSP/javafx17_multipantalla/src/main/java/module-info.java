@@ -17,6 +17,11 @@ module javafx11.multipantalla {
     requires io.vavr;
     requires com.squareup.moshi;
     requires okhttp3;
+    requires io.reactivex.rxjava3;
+//    requires rxjavafx;
+//    requires org.pdfsam.rxjavafx;
+    requires com.google.gson;
+    requires retrofit2.adapter.rxjava3;
 
 
     exports ui.main to javafx.graphics;
@@ -31,6 +36,7 @@ module javafx11.multipantalla {
     exports common;
     exports dao.impl;
     exports domain.usecases;
+    exports domain.modelo;
     exports dao.retrofit;
 
 //    opens ui.pantallas.principal to javafx.fxml;

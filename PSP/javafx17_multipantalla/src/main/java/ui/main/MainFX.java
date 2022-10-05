@@ -19,17 +19,17 @@ public class MainFX {
 
     public void start(@Observes @StartupScene Stage stage) throws IOException {
         try {
-            ResourceBundle r = ResourceBundle.getBundle("/i18n/textos");
+//            ResourceBundle r = ResourceBundle.getBundle("/i18n/textos");
 
-            fxmlLoader.setResources(r);
+            //fxmlLoader.setResources(r);
             Parent fxmlParent = fxmlLoader.load(getClass().getResourceAsStream("/fxml/principal.fxml"));
             PrincipalController controller = fxmlLoader.getController();
             controller.setStage(stage);
 
             stage.setScene(new Scene(fxmlParent));
-            stage.setMinHeight(1000);
-            stage.getScene().getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
-            stage.setTitle(r.getString("app.title"));
+            //stage.setMinHeight(1000);
+//            stage.getScene().getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+//            stage.setTitle(r.getString("app.title"));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

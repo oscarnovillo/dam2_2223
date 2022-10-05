@@ -2,18 +2,19 @@ package ui.pantallas.listado;
 
 import domain.modelo.Cromo;
 import domain.usecases.LoadCromosUseCase;
-import domain.usecases.LoginUseCase;
+import io.vavr.control.Either;
 import jakarta.inject.Inject;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import ui.pantallas.login.LoginState;
+//import org.pdfsam.rxjavafx.schedulers.JavaFxScheduler;
 
 import java.util.List;
 
 public class ListadoViewModel {
 
 
+    private final ObjectProperty<ListadoState> _state;
     private LoadCromosUseCase loginUseCase;
 
     @Inject
@@ -30,8 +31,6 @@ public class ListadoViewModel {
         _state = new SimpleObjectProperty<>(new ListadoState(null, null));
     }
 
-    private final ObjectProperty<ListadoState> _state;
-
     public ReadOnlyObjectProperty<ListadoState> getState() {
         return _state;
     }
@@ -46,6 +45,26 @@ public class ListadoViewModel {
         _state.setValue(ls);
     }
 
+
+    public Either<String, List<Cromo>> llamadaRetrofitAsyncEnUi() {
+        return loginUseCase.llamadaRetrofit();
+    }
+
+    public void llamadaRetrofitAsyncEnViewModel() {
+        loginUseCase.llamadaRetrofitSingle(10)
+                .delay(5, java.util.concurrent.TimeUnit.SECONDS)
+                //.observeOn(JavaFxScheduler.platform())
+                .subscribe(either -> {
+                    ListadoState ls = null;
+                    if (either.isLeft())
+                        ls = new ListadoState(null, either.getLeft());
+                    else
+                        ls = new ListadoState(either.get(), null);
+                    _state.setValue(ls);
+                });
+    }
+
+
     public void llamadaRetrofit() {
         ListadoState ls = null;
         var cromos = loginUseCase.llamadaRetrofit();
@@ -54,11 +73,11 @@ public class ListadoViewModel {
 //        else
 //            ls = new ListadoState(cromos.get(), null);
 
-//        cromos.peek(mijoke -> {
-//            //_state.setValue(new ListadoState(mijoke, null));
-//        }).peekLeft(error -> {
-//            _state.setValue(new ListadoState(null, error));
-//        });
+        cromos.peek(mijoke -> {
+            _state.setValue(new ListadoState(mijoke, null));
+        }).peekLeft(error -> {
+            _state.setValue(new ListadoState(null, error));
+        });
 
     }
 

@@ -54,7 +54,7 @@ public class PrincipalController {
     public BorderPane root;
 
 
-    private Alert alert;
+    private final Alert alert;
 
     private Pane pantallaBienvenida;
 

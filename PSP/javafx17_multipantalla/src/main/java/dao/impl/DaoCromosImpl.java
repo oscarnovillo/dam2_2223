@@ -2,27 +2,29 @@ package dao.impl;
 
 import common.config.Configuracion;
 import dao.DaoCromos;
-import dao.retrofit.ProducesRetrofit;
 import dao.retrofit.llamadas.JokeApi;
 import dao.retrofit.modelo.ResponseJoke;
 import domain.modelo.Cromo;
 import domain.modelo.MiJokes;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.vavr.control.Either;
-import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import okhttp3.MediaType;
+import okhttp3.ResponseBody;
+import retrofit2.HttpException;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class DaoCromosImpl implements DaoCromos {
 
-    private Configuracion configuracion;
+    private final Configuracion configuracion;
 
-    private JokeApi jokeApi;
+    private final JokeApi jokeApi;
 
 
     @Inject
@@ -41,11 +43,10 @@ public class DaoCromosImpl implements DaoCromos {
                 new Cromo("marvel", 4, "descripcion"));
     }
 
-    public Either<String,MiJokes> llamadaRettrofit() {
+    public Either<String, MiJokes> llamadaRettrofit() {
 
 
-
-        Either<String,MiJokes> respuesta = null;
+        Either<String, MiJokes> respuesta = null;
 
         try {
             Thread.sleep(5000);
@@ -55,15 +56,14 @@ public class DaoCromosImpl implements DaoCromos {
 
         Response<ResponseJoke> r = null;
         try {
-            r = jokeApi.getAnyJoke("aa","es").execute();
+            r = jokeApi.getAnyJoke("aa", "es").execute();
 
             if (r.isSuccessful()) {
                 ResponseJoke rj = r.body();
                 MiJokes joker = null;
                 if (rj.getType().equals("twoparts")) {
-                    joker = new MiJokes(rj.getId(), rj.getSetup()+":::"+rj.getDelivery());
-                }
-                else {
+                    joker = new MiJokes(rj.getId(), rj.getSetup() + ":::" + rj.getDelivery());
+                } else {
                     joker = new MiJokes(rj.getId(), rj.getJoke());
                 }
                 respuesta = Either.right(joker);
@@ -79,4 +79,40 @@ public class DaoCromosImpl implements DaoCromos {
         return respuesta;
 
     }
+
+    public Single<Either<String, MiJokes>> llamadaRettrofitSingle() {
+
+
+        return jokeApi.getAnyJokeAsync("es")
+                .map(rj -> {
+                    MiJokes joker = null;
+                    if (rj.getType().equals("twoparts")) {
+                        joker = new MiJokes(rj.getId(), rj.getSetup() + ":::" + rj.getDelivery());
+                    } else {
+                        joker = new MiJokes(rj.getId(), rj.getJoke());
+                    }
+                    return Either.right(joker).mapLeft(Object::toString);
+                })
+                .subscribeOn(Schedulers.io())
+                .onErrorReturn(throwable -> {
+                    Either<String, MiJokes> error = Either.left("Error de comunicacion");
+                    if (throwable instanceof HttpException httpException  ){
+                            try (ResponseBody errorBody = Objects.requireNonNull(httpException.response()).errorBody()) {
+
+                                if (Objects.equals(errorBody.contentType(), MediaType.get("application/json"))) {
+//                                Gson g = new Gson();
+//                                dao.modelo.marvel.ApiError apierror = g.fromJson(((HttpException) throwable).response().errorBody().string(), dao.modelo.marvel.ApiError.class);
+//                                error = Either.left(apierror.getMessage());
+                                } else {
+                                    error = Either.left(httpException.response().message());
+                                }
+                            }
+                        }
+
+                    return error;
+                });
+
+
+    }
+
 }
