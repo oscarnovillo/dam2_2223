@@ -31,7 +31,7 @@ class MainViewModel(
         }
     }
 
-    fun getPersonas(id: Int){
+    fun getPersonas(id: Int) {
         val personas = getPersonas()
 
         if (personas.size < id || id < 0) {
