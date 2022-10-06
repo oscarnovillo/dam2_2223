@@ -18,7 +18,10 @@ module javafx11.multipantalla {
     requires com.squareup.moshi;
     requires okhttp3;
     requires io.reactivex.rxjava3;
-//    requires rxjavafx;
+    requires org.pdfsam.rxjavafx;
+
+
+    //    requires rxjavafx;
 //    requires org.pdfsam.rxjavafx;
     requires com.google.gson;
     requires retrofit2.adapter.rxjava3;

@@ -2,11 +2,14 @@ package ui.pantallas.listado;
 
 import domain.modelo.Cromo;
 import domain.usecases.LoadCromosUseCase;
+import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.vavr.control.Either;
 import jakarta.inject.Inject;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import org.pdfsam.rxjavafx.schedulers.JavaFxScheduler;
 //import org.pdfsam.rxjavafx.schedulers.JavaFxScheduler;
 
 import java.util.List;
@@ -53,7 +56,7 @@ public class ListadoViewModel {
     public void llamadaRetrofitAsyncEnViewModel() {
         loginUseCase.llamadaRetrofitSingle(10)
                 .delay(5, java.util.concurrent.TimeUnit.SECONDS)
-                //.observeOn(JavaFxScheduler.platform())
+                .observeOn(Schedulers.single())
                 .subscribe(either -> {
                     ListadoState ls = null;
                     if (either.isLeft())

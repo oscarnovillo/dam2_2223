@@ -23,12 +23,12 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-base</artifactId>
-            <version>19</version>
+            <version>16</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>19</version>
+            <version>16</version>
         </dependency>
 
 
@@ -45,11 +45,11 @@
             <version>2.9.0</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.pdfsam.rxjava3</groupId>-->
-<!--            <artifactId>rxjavafx</artifactId>-->
-<!--            <version>3.0.2</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.pdfsam.rxjava3</groupId>
+            <artifactId>rxjavafx</artifactId>
+            <version>3.0.2</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/io.reactivex.rxjava2/rxjavafx -->
         <dependency>
             <groupId>io.reactivex.rxjava3</groupId>

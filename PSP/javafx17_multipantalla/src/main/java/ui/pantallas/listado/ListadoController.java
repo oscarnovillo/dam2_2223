@@ -19,7 +19,7 @@ import javafx.scene.Cursor;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-//import org.pdfsam.rxjavafx.schedulers.JavaFxScheduler;
+import org.pdfsam.rxjavafx.schedulers.JavaFxScheduler;
 import ui.pantallas.common.BasePantallaController;
 
 import java.util.Comparator;
@@ -51,9 +51,9 @@ public class ListadoController extends BasePantallaController {
 
     @FXML
     private void ver(ActionEvent actionEvent) {
-//        asyncConTask();
+        //asyncConTask();
 //        //getPrincipalController().sacarAlertError("ahora con single");
-//        asynConSingle();
+        //      asynConSingle();
 
         getPrincipalController().root.setCursor(Cursor.WAIT);
         viewModel.llamadaRetrofitAsyncEnViewModel();
@@ -63,7 +63,7 @@ public class ListadoController extends BasePantallaController {
     private void asynConSingle() {
         Single.fromCallable(viewModel::llamadaRetrofitAsyncEnUi)
                 .subscribeOn(Schedulers.io())
-                //.observeOn(JavaFxScheduler.platform())
+                .observeOn(JavaFxScheduler.platform())
                 .doFinally(() -> getPrincipalController().root.setCursor(Cursor.DEFAULT))
                 .subscribe(result ->
                                 result.peek(cromos -> {
@@ -152,22 +152,21 @@ public class ListadoController extends BasePantallaController {
 
     private void cambiosEstado() {
         viewModel.getState().addListener((observableValue, listadoState, listadoStateNew) -> {
-            if (listadoStateNew.getError() != null) {
-                getPrincipalController().sacarAlertError(listadoStateNew.getError());
-            }
-            if (listadoStateNew.getCromos() != null) {
-                Platform.runLater(() -> {
-                    tabla.getItems().clear();
-                    tabla.getItems().addAll(listadoStateNew.getCromos());
+            Platform.runLater(() -> {
+                if (listadoStateNew.getError() != null) {
+                    getPrincipalController().sacarAlertError(listadoStateNew.getError());
+                }
+                if (listadoStateNew.getCromos() != null) {
+
                     tabla.getItems().clear();
                     tabla.getItems().addAll(listadoStateNew.getCromos());
                     tablaNormal.getItems().clear();
                     tablaNormal.getItems().addAll(listadoStateNew.getCromos());
-                    getPrincipalController().root.setCursor(Cursor.DEFAULT);
-                });
+                }
 
-            }
 
+                getPrincipalController().root.setCursor(Cursor.DEFAULT);
+            });
 
         });
     }

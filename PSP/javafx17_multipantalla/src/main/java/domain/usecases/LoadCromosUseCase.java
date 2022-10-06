@@ -29,14 +29,7 @@ public class LoadCromosUseCase {
 
 
     public Single<Either<String, List<Cromo>>> llamadaRetrofitSingle(int id) {
-        return Completable.fromCallable(() -> {
-                    //validar datos
-                    if (id < 0) {
-                        Either<String, MiJokes> error = Either.left("Error de comunicacion");
-                        return error;
-                    }
-                    return null;
-                }
-        ).andThen(dao.llamadaRettrofitSingle().map(either -> either.map(miJokes -> List.of(new Cromo("jokes", miJokes.id(), miJokes.joke())))));
+        return dao.llamadaRettrofitSingle()
+                .map(either -> either.map(miJokes -> List.of(new Cromo("jokes", miJokes.id(), miJokes.joke()))));
     }
 }
