@@ -27,11 +27,11 @@ public class ListadoViewModel {
         ListadoState ls = null;
         List<Cromo> cromos = loginUseCase.loadCromos();
         if (cromos == null)
-            ls = new ListadoState(null, "no se han podido cargar cromos");
+            ls = new ListadoState(null, "no se han podido cargar cromos",false);
         else
-            ls = new ListadoState(cromos, null);
+            ls = new ListadoState(cromos, null,false);
 
-        _state = new SimpleObjectProperty<>(new ListadoState(null, null));
+        _state = new SimpleObjectProperty<>(new ListadoState(null, null,false));
     }
 
     public ReadOnlyObjectProperty<ListadoState> getState() {
@@ -42,9 +42,9 @@ public class ListadoViewModel {
         ListadoState ls = null;
         List<Cromo> cromos = loginUseCase.loadCromos();
         if (cromos == null)
-            ls = new ListadoState(null, "no se han podido cargar cromos");
+            ls = new ListadoState(null, "no se han podido cargar cromos",false);
         else
-            ls = new ListadoState(cromos, null);
+            ls = new ListadoState(cromos, null,false);
         _state.setValue(ls);
     }
 
@@ -54,15 +54,18 @@ public class ListadoViewModel {
     }
 
     public void llamadaRetrofitAsyncEnViewModel() {
+
+        _state.setValue(new ListadoState(null, null, true));
+
         loginUseCase.llamadaRetrofitSingle(10)
                 .delay(5, java.util.concurrent.TimeUnit.SECONDS)
                 .observeOn(Schedulers.single())
                 .subscribe(either -> {
                     ListadoState ls = null;
                     if (either.isLeft())
-                        ls = new ListadoState(null, either.getLeft());
+                        ls = new ListadoState(null, either.getLeft(),false);
                     else
-                        ls = new ListadoState(either.get(), null);
+                        ls = new ListadoState(either.get(), null,false);
                     _state.setValue(ls);
                 });
     }
@@ -77,9 +80,9 @@ public class ListadoViewModel {
 //            ls = new ListadoState(cromos.get(), null);
 
         cromos.peek(mijoke -> {
-            _state.setValue(new ListadoState(mijoke, null));
+            _state.setValue(new ListadoState(mijoke, null,false));
         }).peekLeft(error -> {
-            _state.setValue(new ListadoState(null, error));
+            _state.setValue(new ListadoState(null, error,false));
         });
 
     }

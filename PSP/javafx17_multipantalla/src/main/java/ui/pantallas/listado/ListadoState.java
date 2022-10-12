@@ -10,4 +10,5 @@ public class ListadoState {
 
     private final List<Cromo> cromos;
     private final String error;
+    private final boolean cargando;
 }
