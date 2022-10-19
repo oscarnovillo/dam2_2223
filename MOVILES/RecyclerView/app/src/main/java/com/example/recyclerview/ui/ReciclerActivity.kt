@@ -37,10 +37,10 @@ class ReciclerActivity : AppCompatActivity() {
         val rvPersona = this.findViewById<RecyclerView>(R.id.rvPersonas)
 
         Snackbar.make(rvPersona, " ${listaPersonas[0].name} ", Snackbar.LENGTH_SHORT).show()
-
+        var adapter = PersonasAdapter(listaPersonas, ::click)
 
         listaPersonas.let {
-            rvPersona.adapter = PersonasAdapter(it,::click)
+            rvPersona.adapter = adapter
             rvPersona.layoutManager = GridLayoutManager(this@ReciclerActivity,2)
         }
 

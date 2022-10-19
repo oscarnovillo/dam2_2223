@@ -9,8 +9,6 @@ X
 (gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
 F
 app/proguard-rules.pro,9\e\9e08934d811afe28fbc77aaa3c0d747b94348db9
-S
-#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
 A
 gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
 :
@@ -24,8 +22,6 @@ m
 settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
-@
-app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
 p
 @app/src/main/java/com/example/recyclerview/data/marvel/Comics.kt,a\e\aef65241519a7a691c67aba9aa5b973284c579bd
 n
@@ -56,17 +52,3 @@ n
 >app/src/main/java/com/example/recyclerview/data/datamappers.kt,f\2\f265e94e232135dca90d0c4eb1b65437fb42d9a3
 j
 :app/src/main/java/com/example/recyclerview/data/Ejemplo.kt,d\5\d5cd41bf8698b45d83e63136e355e409323c2ad8
-t
-Dapp/src/main/java/com/example/recyclerview/data/EjemploRepository.kt,7\b\7b9900ba201311a228b0f58df82ce5c0e50ab565
-l
-<app/src/main/java/com/example/recyclerview/domain/Persona.kt,8\7\879e652c60d1771e002b9b804fd0cb4f2ad4313b
-m
-=app/src/main/java/com/example/recyclerview/ui/MainActivity.kt,4\1\413242b3d0c5ccee5f3a75050c332cfa1f9ca993
-p
-@app/src/main/java/com/example/recyclerview/ui/PersonasAdapter.kt,9\5\957f2d896500257ea3f09688ce9e435e75c0fd7a
-q
-Aapp/src/main/java/com/example/recyclerview/ui/ReciclerActivity.kt,6\8\680ac9ca3b56dd58c90415db2647ff2af9f29440
-a
-1app/src/main/java/com/example/recyclerview/App.kt,6\d\6d916134f8d744f6bae3e78001f83f34098b80dd
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
