@@ -7,8 +7,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview.R
+import com.example.recyclerview.data.Ejemplo
 import com.example.recyclerview.data.EjemploRepository
-import com.example.recyclerview.domain.model.Persona
+import com.example.recyclerview.domain.Persona
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 
@@ -26,10 +27,6 @@ class ReciclerActivity : AppCompatActivity() {
 
         intent.extras?.let {
             val persona = it.getParcelable<Persona>(getString(R.string.persona))
-
-            val id = it.getInt("id")
-            //con esto se llama al viewmodel y cambia el livedata
-
             Timber.i("Nombre: ${persona}")
             Log.i("MITAG", "Nombre: ${persona}")
         }
@@ -40,14 +37,12 @@ class ReciclerActivity : AppCompatActivity() {
         val rvPersona = this.findViewById<RecyclerView>(R.id.rvPersonas)
 
         Snackbar.make(rvPersona, " ${listaPersonas[0].name} ", Snackbar.LENGTH_SHORT).show()
+        var adapter = PersonasAdapter(listaPersonas, ::click)
 
-
-        listaPersonas.let {listado ->
-            rvPersona.adapter = PersonasAdapter(listado,::click)
+        listaPersonas.let {
+            rvPersona.adapter = adapter
             rvPersona.layoutManager = GridLayoutManager(this@ReciclerActivity,2)
         }
-
-
 
 
 
