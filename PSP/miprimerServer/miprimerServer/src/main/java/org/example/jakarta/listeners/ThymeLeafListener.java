@@ -1,10 +1,8 @@
-package org.example.listeners;
+package org.example.jakarta.listeners;
 
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
-import jakarta.servlet.http.HttpSessionAttributeListener;
-import jakarta.servlet.http.HttpSessionListener;
 import org.thymeleaf.ITemplateEngine;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -14,7 +12,7 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 
 @WebListener
-public class ThymeLeafListener implements ServletContextListener, HttpSessionListener, HttpSessionAttributeListener {
+public class ThymeLeafListener implements ServletContextListener {
 
     public static final String TEMPLATE_ENGINE_ATTR = "thymeleaf.TemplateEngineInstance";
     private ITemplateEngine templateEngine;
@@ -29,6 +27,7 @@ public class ThymeLeafListener implements ServletContextListener, HttpSessionLis
         this.templateEngine = templateEngine(this.application);
 
         sce.getServletContext().setAttribute(TEMPLATE_ENGINE_ATTR, templateEngine);
+
     }
 
     private ITemplateEngine templateEngine(IWebApplication application) {

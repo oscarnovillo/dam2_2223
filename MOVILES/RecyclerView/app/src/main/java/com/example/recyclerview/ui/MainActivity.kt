@@ -1,32 +1,23 @@
 package com.example.recyclerview.ui
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Parcelable
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Toast
-import coil.ImageLoader
 import coil.load
-import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
-import coil.transform.RoundedCornersTransformation
 import com.example.recyclerview.R
-import com.example.recyclerview.data.Ejemplo
+import com.example.recyclerview.data.model.Ejemplo
 import com.example.recyclerview.data.EjemploRepository
 import com.example.recyclerview.databinding.ActivityMainBinding
 
-import com.example.recyclerview.domain.Persona
+import com.example.recyclerview.domain.model.Persona
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import timber.log.Timber
-import java.io.File
 import java.io.IOException
 import java.io.InputStream
 import java.time.LocalDateTime
@@ -45,7 +36,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        // setContentView(R.layout.activity_main)
-
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -78,16 +68,18 @@ class MainActivity : AppCompatActivity() {
 
           //imageview.load(assets.open("lion.jpg"))
 
-            imageview.load(Uri.parse("file:///android_asset/lion.jpg"))
+            imageview.load(Uri.parse("file:///android_asset/lion.jpg")){
+                transformations(CircleCropTransformation())
+            }
 
             EjemploRepository().addEjemplo(Ejemplo("nombre","appelidos",10, LocalDateTime.now(),"",""))
 
            // imageview.load(Uri.parse("file:///android_asset/image.jpg"))
             //imageview.load(File("/asset/lion.jpg"))
 
-//            imageview.load("https://image.tmdb.org/t/p/w185/dzBtMocZuJbjLOXvrl4zGYigDzh.jpg"){
-//                transformations(CircleCropTransformation())
-//            }
+            imageview.load("http://i.annihil.us/u/prod/marvel/i/mg/4/60/52695285d6e7e.jpg"){
+                transformations(CircleCropTransformation())
+            }
 
 //            val imageLoader = ImageLoader(this)
 //            val request = ImageRequest.Builder(this)
@@ -110,7 +102,8 @@ class MainActivity : AppCompatActivity() {
 
 
         } catch (e: IOException) {
-            Timber.e(e,"Error leyendo fichero")
+            Timber.e(e,"Error leyendo fichero desde timber")
+            Log.e("TAG","Error leyendo fichero")
         }
 
         binding.button.setOnClickListener {
@@ -124,6 +117,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 .setPositiveButton("YES") { view, _ ->
                     val intent =  Intent(this, ReciclerActivity::class.java)
+                    intent.putExtra("id",1)
+
                     intent.putExtra(getString(R.string.persona), Persona("nombre","apellidos",10))
                     startActivity(intent)
                     view.dismiss()

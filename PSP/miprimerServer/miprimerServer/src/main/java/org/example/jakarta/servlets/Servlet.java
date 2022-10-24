@@ -1,4 +1,4 @@
-package org.example;
+package org.example.jakarta.servlets;
 
 import jakarta.inject.Inject;
 import jakarta.servlet.*;
@@ -27,4 +27,6 @@ public class Servlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
+
+
 }

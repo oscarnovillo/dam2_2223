@@ -1,6 +1,6 @@
 package com.example.recyclerview.data
 
-import com.example.recyclerview.domain.Persona
+import com.example.recyclerview.data.model.Ejemplo
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.ToJson
@@ -66,7 +66,13 @@ class EjemploRepository(file: InputStream? = null) {
         return lista
     }
 
-    fun addEjemplo(ejemplo:Ejemplo)
+
+    fun getEjemplo(id:Int) : Ejemplo{
+        //return lista.map { it.toPersona() }
+        return lista[id]
+    }
+
+    fun addEjemplo(ejemplo: Ejemplo)
     {
         lista.add(ejemplo)
     }

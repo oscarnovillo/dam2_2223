@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.time.LocalDateTime" %><%--
   Created by IntelliJ IDEA.
   User: oscar
   Date: 12/10/2022
@@ -14,9 +14,13 @@
     <title>Title</title>
 </head>
 <body>
-<jsp:useBean id="list" scope="request" type="java.util.List"/>
-<c:forEach items="${list}" var="item">
-    <c:out value="${item}"/>
-</c:forEach>
+
+    <c:forEach items="${list}" var="item">
+        <h1><c:out value="${item}"/></h1>
+
+    </c:forEach>
+
 </body>
 </html>
+
+

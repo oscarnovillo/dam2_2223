@@ -1,4 +1,4 @@
-package com.example.recyclerview.data
+package com.example.recyclerview.data.model
 
 
 import android.os.Parcelable
@@ -17,9 +17,9 @@ data class Ejemplo (
     @Json(name = "id")
     val id: Int,
     @Json(name = "modified")
-    val modified: LocalDateTime,
+    val modified: LocalDateTime = LocalDateTime.now(),
     @Json(name = "name")
-    val name: String,
+    val name: String = "",
     @Json(name = "path")
-    val path: String
+    val path: String = "",
 ) : Parcelable

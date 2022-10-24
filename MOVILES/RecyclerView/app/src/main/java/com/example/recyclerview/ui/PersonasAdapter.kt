@@ -6,14 +6,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview.R
-import com.example.recyclerview.data.Ejemplo
+import com.example.recyclerview.data.model.Ejemplo
 import com.example.recyclerview.databinding.ItemPersonaBinding
-
-import com.example.recyclerview.domain.Persona
 
 class PersonasAdapter(
     private val personas: List<Ejemplo>,
-    private val onClickBoton: (String) -> Unit
+    private val onClickBoton: (String) -> Unit,
 ) : RecyclerView.Adapter<PersonasViewHolder>() {
 
 

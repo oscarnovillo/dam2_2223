@@ -1,12 +1,11 @@
-package org.example;
+package org.example.jakarta.servlets;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import org.example.listeners.ThymeLeafListener;
+import org.example.jakarta.listeners.ThymeLeafListener;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
-import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.web.IWebExchange;
 import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 

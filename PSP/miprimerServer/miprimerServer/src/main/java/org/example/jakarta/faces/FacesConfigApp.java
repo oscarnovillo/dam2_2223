@@ -1,4 +1,4 @@
-package org.example;
+package org.example.jakarta.faces;
 
 
 import jakarta.enterprise.context.ApplicationScoped;
