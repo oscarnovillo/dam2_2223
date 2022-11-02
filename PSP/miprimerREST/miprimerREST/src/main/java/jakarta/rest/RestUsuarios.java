@@ -14,7 +14,7 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.modelmapper.ModelMapper;
-import servicios.ServiciosUsuarios;
+import domain.servicios.ServiciosUsuarios;
 
 import java.time.LocalDateTime;
 import java.util.List;

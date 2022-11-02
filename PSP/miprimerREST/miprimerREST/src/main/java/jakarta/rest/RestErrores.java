@@ -5,7 +5,7 @@ import dao.modelo.Usuario;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import servicios.ServiciosErrores;
+import domain.servicios.ServiciosErrores;
 
 import java.util.List;
 
