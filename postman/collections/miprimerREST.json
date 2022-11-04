@@ -26,6 +26,24 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "New Request",
+			"id": "20835020-8195-4899-8685-f4d2db2b73e2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
