@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview.R
-import com.example.recyclerview.data.Ejemplo
+import com.example.recyclerview.data.model.Ejemplo
 import com.example.recyclerview.databinding.ItemPersonaBinding
 
-import com.example.recyclerview.domain.Persona
+import com.example.recyclerview.domain.model.Persona
 
 class PersonasAdapter(
     private var personas: List<Ejemplo>,
@@ -58,7 +58,7 @@ class PersonasViewHolder(private val view: View) : RecyclerView.ViewHolder(view)
 //        view.findViewById<TextView>(R.id.tvApellidos).text =
 
         view.findViewById<TextView>(R.id.button2).setOnClickListener {
-            onClickBoton(binding.tvNombre.toString());
+            onClickBoton(persona.name);
         }
 
     }

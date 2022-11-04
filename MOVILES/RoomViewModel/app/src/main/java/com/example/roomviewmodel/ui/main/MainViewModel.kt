@@ -39,9 +39,16 @@ class MainViewModel(
 
     private fun getPersonas() {
 
-        viewModelScope.launch {
-            _personas.value = getPersonas.invoke()
-            _uiState.value = MainState(getPersonas.invoke())
+
+        viewModelScope.launch() {
+            try {
+                _personas.value = getPersonas.invoke()
+                _uiState.value = MainState(getPersonas.invoke())
+
+            }
+            catch (e: Exception) {
+                _uiState.value =_uiState.value?.copy(error = e.message)
+            }
 
         }
 
@@ -57,6 +64,11 @@ class MainViewModel(
                 getPersonas
             }
             MainEvent.ErrorVisto -> _uiState.value = _uiState.value?.copy(error = null)
+            is MainEvent.GetPersonaPorId -> {
+            }
+
+
+
         }
     }
 

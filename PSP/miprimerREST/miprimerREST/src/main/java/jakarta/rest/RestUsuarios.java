@@ -44,6 +44,7 @@ public class RestUsuarios {
 
     @GET
     @Path("/uno")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getUsuario(@QueryParam("id") String id,
                                @Context HttpServletRequest request) {
 
@@ -78,10 +79,12 @@ public class RestUsuarios {
         su.dameUno(id)
                 .peek(usuario -> r.set(Response.ok().entity(usuario).build()))
                 .peekLeft(apiError -> r.set(Response.status(Response.Status.NOT_FOUND)
-                        .entity(ApiError.builder()
-                                .message("error not found")
-                                .fecha(LocalDateTime.now())
-                                .build())
+                        .entity(new ApiError(apiError.getMessage(), LocalDateTime.now()))
+//
+//                                ApiError.builder()
+//                                .message("error not found")
+//                                .fecha(LocalDateTime.now())
+//                                .build())
                         .build()));
 
         return r.get();

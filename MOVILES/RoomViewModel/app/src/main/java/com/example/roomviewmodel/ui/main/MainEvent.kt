@@ -2,9 +2,10 @@ package com.example.roomviewmodel.ui.main
 
 import com.example.roomviewmodel.domain.modelo.Persona
 
-sealed class MainEvent(val persona: Persona? = null) {
+sealed class MainEvent {
 
-    class InsertPersona(persona: Persona) : MainEvent(persona)
+    class InsertPersona(val persona: Persona) : MainEvent()
+    class GetPersonaPorId(val id: Int) : MainEvent()
     object GetPersonas : MainEvent()
     object ErrorVisto : MainEvent()
 }

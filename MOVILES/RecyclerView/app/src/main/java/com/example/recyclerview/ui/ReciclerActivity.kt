@@ -7,9 +7,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview.R
-import com.example.recyclerview.data.Ejemplo
+
 import com.example.recyclerview.data.EjemploRepository
-import com.example.recyclerview.domain.Persona
+import com.example.recyclerview.domain.model.Persona
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 

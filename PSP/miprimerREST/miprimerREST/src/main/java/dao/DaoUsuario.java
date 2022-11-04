@@ -64,12 +64,14 @@ public class DaoUsuario {
     }
 
     public List<Usuario> dameTodos() {
-        JdbcTemplate jtm = new JdbcTemplate(
-                dbConnection.getDataSource());
 
-        // select devuelve LIST
-        return jtm.query("Select * from usuarios",
-                BeanPropertyRowMapper.newInstance(Usuario.class));
+        return usuarios;
+//        JdbcTemplate jtm = new JdbcTemplate(
+//                dbConnection.getDataSource());
+//
+//        // select devuelve LIST
+//        return jtm.query("Select * from usuarios",
+//                BeanPropertyRowMapper.newInstance(Usuario.class));
     }
 
     public List<UsuarioEntity> dameTodosHibernate() {

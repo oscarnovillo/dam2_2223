@@ -13,6 +13,7 @@ import com.example.roomviewmodel.data.modelo.PersonaEntity
 abstract class PersonaRoomDatabase : RoomDatabase() {
 
     abstract fun personaDao(): PersonaDao
+    abstract fun cosaDao(): CosaDao
 
     companion object {
         @Volatile
