@@ -1,0 +1,60 @@
+{
+	"info": {
+		"_postman_id": "a34a2e25-7149-4ebe-836f-b604cb61b77a",
+		"name": "miprimerREST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3854333-a34a2e25-7149-4ebe-836f-b604cb61b77a"
+	},
+	"item": [
+		{
+			"name": "request ejemplo",
+			"id": "7e59d45d-4717-4ca1-9fae-0fa8a4f5f37f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/loquesea",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"loquesea"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e1a9d130-8e92-4c41-95de-deba40700303",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "acfb7f70-9a61-42f8-a18e-020cc37cc9dd",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "6b1e6606-9d6b-4bc4-a495-36851bfff2ca",
+			"key": "url",
+			"value": "http://www.as.com"
+		}
+	]
+}
