@@ -16,4 +16,5 @@ public class BaseDatosCaidaExceptionMapper  implements ExceptionMapper<BaseDatos
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(apiError)
                 .type(MediaType.APPLICATION_JSON_TYPE).build();
     }
+
 }
