@@ -1,14 +1,14 @@
 {
 	"info": {
-		"_postman_id": "a34a2e25-7149-4ebe-836f-b604cb61b77a",
+		"_postman_id": "e48444fd-051b-4129-8f2b-d45d456b179f",
 		"name": "miprimerREST",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_uid": "3854333-a34a2e25-7149-4ebe-836f-b604cb61b77a"
+		"_uid": "3854333-e48444fd-051b-4129-8f2b-d45d456b179f"
 	},
 	"item": [
 		{
-			"name": "request ejemplo",
-			"id": "7e59d45d-4717-4ca1-9fae-0fa8a4f5f37f",
+			"name": "Call todos los errores",
+			"id": "d9f1b084-788b-4308-8cfa-aff710c71c92",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -16,12 +16,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/loquesea",
+					"raw": "{{url}}/api/errores",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"loquesea"
+						"api",
+						"errores"
 					]
 				}
 			},
@@ -29,7 +30,7 @@
 		},
 		{
 			"name": "New Request",
-			"id": "20835020-8195-4899-8685-f4d2db2b73e2",
+			"id": "b81f85d0-99f0-4961-981f-08ab2d40f98d",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -50,7 +51,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "e1a9d130-8e92-4c41-95de-deba40700303",
+				"id": "942ae24a-e8b8-48d9-8823-131f8c5d4b2d",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -60,7 +61,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "acfb7f70-9a61-42f8-a18e-020cc37cc9dd",
+				"id": "28d0e68a-ff72-4cf5-9fe0-033d92305d6b",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -70,9 +71,9 @@
 	],
 	"variable": [
 		{
-			"id": "6b1e6606-9d6b-4bc4-a495-36851bfff2ca",
+			"id": "40f3ce73-37b6-4d3a-ba58-318101b580b9",
 			"key": "url",
-			"value": "http://www.as.com"
+			"value": "http://localhost:8080/miprimerREST-1.0-SNAPSHOT"
 		}
 	]
 }
