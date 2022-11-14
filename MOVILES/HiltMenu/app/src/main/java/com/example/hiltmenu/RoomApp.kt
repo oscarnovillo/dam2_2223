@@ -9,6 +9,7 @@ import timber.log.Timber
 class RoomApp : Application() {
     override fun onCreate() {
         super.onCreate()
+        Timber.plant(Timber.DebugTree())
 
     }
 

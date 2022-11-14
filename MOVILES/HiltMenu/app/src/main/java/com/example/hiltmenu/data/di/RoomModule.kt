@@ -28,8 +28,8 @@ object RoomModule {
         @Named("assetDB") ruta: String
     )  =
         Room.databaseBuilder(context, PersonaRoomDatabase::class.java, "persona_database")
-            .fallbackToDestructiveMigration()
             .createFromAsset(ruta)
+            .fallbackToDestructiveMigrationFrom(1)
             .build()
 
     @Provides

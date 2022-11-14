@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         binding.rvPersonas.adapter = personasAdapter
 
         binding.button.setOnClickListener {
-            val cosas = listOf(Cosa(getString(R.string.cosa1), 22))
+            val cosas = listOf(Cosa(getString(R.string.cosa1), 0))
             viewModel.insertPersonaWithCosas(Persona(0, "nombre", LocalDate.now(), cosas))
             viewModel.getPersonasDes()
         }

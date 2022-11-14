@@ -9,6 +9,7 @@ import com.example.hiltmenu.usecases.personas.InsertPersona
 import com.example.hiltmenu.usecases.personas.InsertPersonaWithCosas
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -77,13 +78,13 @@ class MainViewModel @Inject constructor(private val getPersonas: GetPersonas,
     {
         viewModelScope.launch() {
             try {
-                insertPersona.invoke(persona)
-                println(persona.id)
+                insertPersonaWithCosas.invoke(persona)
+                Timber.i(persona.id.toString())
             }
             catch(e:Exception)
             {
                 _error.value = e.message
-                Log.e("TAG:::",e.message,e)
+               Timber.e(e,e.message)
             }
             //_personas.value = getPersonasDes.invoke(1)
         }

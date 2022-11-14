@@ -34,6 +34,8 @@ class PersonaAdapter:
         fun bind(item: Persona) = with(binding) {
             tvNombre.text = item.nombre
             tvId.text = item.id.toString()
+            tvSizeCosas.text = (item.cosas?.size ?: 0).toString()
+
         }
 
     }

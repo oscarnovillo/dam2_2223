@@ -4,7 +4,7 @@ import com.example.hiltmenu.domain.Cosa
 import com.example.hiltmenu.domain.Persona
 
 fun PersonaEntity.toPersona() : Persona {
-    return Persona(this.id,this.nombre,this.nacimiento,null)
+    return Persona(this.id,this.nombre,this.nacimiento)
 }
 fun PersonaWithCosas.toPersona() : Persona {
     return Persona(this.persona.id,this.persona.nombre,this.persona.nacimiento,this.cosa?.map { it.toCosa() })

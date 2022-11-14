@@ -33,10 +33,10 @@ interface PersonaDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(item: PersonaEntity) : Long
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(item: CosaEntity)
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(item: List<CosaEntity>)
 
     @Transaction
