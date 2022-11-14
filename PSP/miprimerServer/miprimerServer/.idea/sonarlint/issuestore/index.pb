@@ -1,28 +1,4 @@
 
-T
-$.idea/codeStyles/codeStyleConfig.xml,d\d\dd7b3350c29c49497756c7f32c69a3bed18b1cba
-S
-#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
-L
-.idea/codeStyles/Project.xml,6\e\6ecd6000a7b6f4a2884412ff19f74193ed089648
-f
-6src/main/java/org/example/servicios/ServiciosTest.java,c\a\ca43a8904062cf9a8e0dbd8fee67f56da8879915
-]
--src/main/java/org/example/FacesConfigApp.java,a\8\a8f885b429e3aa05054adfb38f6d83e4496f3056
-Y
-)src/main/java/org/example/ServletMVC.java,f\3\f3560beb1ada4ee85ff2bc5e8e4e007c5682ffbe
-Q
-!src/main/webapp/WEB-INF/beans.xml,8\3\83008b1a88ba03a2548bb5b9ad0768c6c307d36c
-J
-src/main/webapp/index.html,1\3\1337d72a3b1928dba82aa5210f5cdc0e88ce895b
-P
- src/main/webapp/primefaces.xhtml,e\8\e84cf91696edb6feb1b325c8a7d4cbcf2d995091
-J
-src/main/webapp/primer.jsp,0\2\025c299c9c3272e6776eebe3440b96254bd31ab1
-Y
-)src/main/java/org/example/Plantillas.java,3\1\317fa5c0759f3452c1141c0242eb285a99113faa
-j
-:src/main/java/org/example/listeners/ThymeLeafListener.java,d\1\d1e830b875d54f1deda18f6e3ad6a6098e0decc6
 [
 +src/main/webapp/WEB-INF/templates/home.html,b\6\b6ee712d09490d168097dfc1846c3b8b90a5fef5
 X
@@ -35,7 +11,9 @@ K
 src/main/webapp/error.xhtml,7\9\79b0154f493965e29cbaa3776a248b1bf6bf363b
 T
 $src/main/webapp/META-INF/context.xml,c\b\cbfb0d2e9b2b9fbf9d54374577c894a38643c6d0
-V
-&src/main/java/org/example/Servlet.java,7\4\7479cb0bd24afcfaaa4045ddcd527ee472917877
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+\
+,src/main/webapp/WEB-INF/templates/param.html,2\5\257a47288102ad233c54e91c6e93e64964c3f830
+Q
+!src/main/webapp/WEB-INF/beans.xml,8\3\83008b1a88ba03a2548bb5b9ad0768c6c307d36c
