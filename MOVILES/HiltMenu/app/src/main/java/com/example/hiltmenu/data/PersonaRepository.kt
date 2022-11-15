@@ -20,4 +20,7 @@ class PersonaRepository @Inject constructor(private val personaDao: PersonaDao) 
     suspend fun insertPersona(persona: PersonaEntity) = personaDao.insert(persona)
 
     suspend fun insertPersonaEntera(persona: PersonaWithCosas) = personaDao.createTransaction(persona)
+
+    //delete persona
+    suspend fun deletePersona(persona: PersonaEntity) = personaDao.delete(persona)
 }

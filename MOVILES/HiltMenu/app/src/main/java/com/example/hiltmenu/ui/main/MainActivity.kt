@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         // Handle item selection
         return when (item.itemId) {
             R.id.action_action1 -> {
-
+                viewModel.deletePersona( viewModel.personas.value?.get(3)!!)
 
                 true
             }

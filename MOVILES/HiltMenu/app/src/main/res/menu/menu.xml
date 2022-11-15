@@ -6,13 +6,13 @@
         android:id="@+id/action_action1"
         android:icon="@drawable/ic_action_name"
         android:title="test"
-        app:showAsAction="never"
+        app:showAsAction="always"
         />
     <item
         android:id="@+id/action_action2"
         android:icon="@drawable/ic_action_name"
         android:title="action2"
-        app:showAsAction="withText"
+        app:showAsAction="ifRoom"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
     <item
         android:id="@+id/action_action3"

@@ -8,6 +8,9 @@ import com.example.hiltmenu.data.modelo.PersonaWithCosas
 @Dao
 interface PersonaDao {
 
+
+
+
     @Query("SELECT * from ${Constantes.TABLA_PERSONAS} ORDER BY nombre ASC")
     suspend fun getPersonas(): List<PersonaEntity>
 

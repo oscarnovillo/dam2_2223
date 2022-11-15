@@ -12,11 +12,11 @@ import java.util.Random;
 public class DaoErrores {
 
 
+    public static List<Usuario> usuarios = new ArrayList<>();
+
     public List<Usuario> dameTodos() {
 
-        List<Usuario> usuarios = new ArrayList<>();
-
-        usuarios.add(new Usuario("99","nombre","pass", LocalDateTime.now()));
+       // usuarios.add(new Usuario("99","nombre","pass", LocalDateTime.now()));
 
         Random r = new Random();
 

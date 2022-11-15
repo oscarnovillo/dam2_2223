@@ -3,12 +3,11 @@ package com.example.hiltmenu.ui.main
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.hiltmenu.domain.Persona
-import com.example.hiltmenu.usecases.personas.GetPersonas
-import com.example.hiltmenu.usecases.personas.GetPersonasDes
-import com.example.hiltmenu.usecases.personas.InsertPersona
-import com.example.hiltmenu.usecases.personas.InsertPersonaWithCosas
+import com.example.hiltmenu.usecases.personas.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.lang.Exception
 import javax.inject.Inject
@@ -17,7 +16,9 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val getPersonas: GetPersonas,
                                         private val insertPersona: InsertPersona,
                                         private val insertPersonaWithCosas: InsertPersonaWithCosas,
-                                        private val getPersonasDes: GetPersonasDes,) : ViewModel(){
+                                        private val getPersonasDes: GetPersonasDes,
+                                        private val deletePersona: DeletePersona,
+                                        ) : ViewModel(){
 
     private val _personas = MutableLiveData<List<Persona>>()
     val personas: LiveData<List<Persona>> get() = _personas
@@ -60,11 +61,29 @@ class MainViewModel @Inject constructor(private val getPersonas: GetPersonas,
 
     }
 
+    fun deletePersona(persona:Persona)
+    {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                try {
+                    deletePersona.invoke(persona)
+                    _personas.value = getPersonas.invoke()
+                    Timber.i(persona.id.toString())
+                }
+                catch(e:Exception)
+                {
+                    _error.value = e.message
+                    Timber.e(e,e.message)
+                }
 
+            }
+
+        }
+    }
 
     fun insertPersona(persona: Persona)
     {
-        viewModelScope.launch {
+        viewModelScope.launch() {
             insertPersona.invoke(persona)
             _personas.value = getPersonas.invoke()
             //_personas.value = getPersonasDes.invoke(1)
