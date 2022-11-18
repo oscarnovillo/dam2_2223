@@ -15,4 +15,17 @@ public class ResponseJoke{
 	private final String joke;
 	private final String setup;
 	private final String delivery;
+
+	public ResponseJoke(Flags flags, boolean safe, int id, boolean error, String category, String type, String lang, String joke, String setup, String delivery) {
+		this.flags = flags;
+		this.safe = safe;
+		this.id = id;
+		this.error = error;
+		this.category = category;
+		this.type = type;
+		this.lang = lang;
+		this.joke = joke;
+		this.setup = setup;
+		this.delivery = delivery;
+	}
 }
