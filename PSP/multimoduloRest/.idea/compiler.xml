@@ -10,6 +10,7 @@
         <module name="cliente" />
         <module name="servidor" />
         <module name="domain" />
+        <module name="miprimerREST" />
       </profile>
     </annotationProcessing>
   </component>
