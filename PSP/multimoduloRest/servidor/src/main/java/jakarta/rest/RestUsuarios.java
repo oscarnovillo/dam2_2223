@@ -7,6 +7,7 @@ import dao.modelo.UsuarioEntity;
 import io.vavr.control.Either;
 import jakarta.annotation.security.RolesAllowed;
 import domain.errores.ApiError;
+import jakarta.filtros.Secure;
 import jakarta.inject.Inject;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.ws.rs.*;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Path("/users")
+
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class RestUsuarios {
@@ -91,6 +93,7 @@ public class RestUsuarios {
     }
 
     @GET
+    @Secure
     public List<Usuario> getAllUsuario() {
         return su.dameTodos();
     }

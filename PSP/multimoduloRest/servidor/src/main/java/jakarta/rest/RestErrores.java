@@ -5,10 +5,12 @@ import dao.DaoErrores;
 import domain.modelo.Usuario;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import domain.servicios.ServiciosErrores;
 import jakarta.ws.rs.core.Response;
 
+import java.net.http.HttpRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +20,9 @@ import java.util.stream.Collectors;
 public class RestErrores {
 
     private ServiciosErrores su;
+
+    @Context
+    private HttpRequest request;
 
 
     @Inject
@@ -40,6 +45,9 @@ public class RestErrores {
 
     @POST
     public Response addUsuario(Usuario usuario) {
+
+
+
         DaoErrores.usuarios.add(usuario);
         usuario.setId("" + Math.random());
         return Response.status(Response.Status.CREATED).entity(usuario).build();
