@@ -26,7 +26,7 @@ interface PersonaDao {
     suspend fun getPersonaWithCosas(): List<PersonaWithCosas>
 
     @Query("SELECT * from personas WHERE id = :id")
-    fun getPersona(id: Int): PersonaEntity
+    suspend fun getPersona(id: Int): PersonaEntity
 
     // Specify the conflict strategy as IGNORE, when the user tries to add an
     // existing Item into the database Room ignores the conflict.

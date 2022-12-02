@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/blankFragment">
+
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.example.navigation.BlankFragment"
+        android:label="blank Fragment"
+        tools:layout="@layout/fragment_blank">
+        <action
+            android:id="@+id/action_blankFragment_to_blankFragment22"
+            app:destination="@id/blankFragment2"
+
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_blankFragment_to_blankFragment3"
+            app:destination="@id/blankFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/blankFragment2"
+        android:name="com.example.navigation.BlankFragment2"
+        android:label="blank fragment 2"
+        tools:layout="@layout/blank_fragment">
+        <argument
+            android:name="persona"
+            android:defaultValue="@null"
+            app:argType="com.example.navigation.Persona"
+            app:nullable="true" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="myapp://navigaton/bk2" />
+        <action
+            android:id="@+id/action_blankFragment2_to_blankFragment"
+            app:destination="@id/blankFragment"
+            app:popUpTo="@id/blankFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_blankFragment2_to_blankFragment3"
+            app:destination="@id/blankFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/blankFragment3"
+        android:name="com.example.navigation.BlankFragment3"
+        android:label="blank fragment 3"
+        tools:layout="@layout/fragment_blank2" >
+        <action
+            android:id="@+id/action_blankFragment3_to_blankFragment2"
+            app:destination="@id/blankFragment2"
+            app:launchSingleTop="true" />
+    </fragment>
+</navigation>

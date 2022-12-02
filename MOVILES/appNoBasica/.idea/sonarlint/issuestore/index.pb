@@ -28,8 +28,6 @@ w
 Gapp/src/main/java/com/example/appnobasica/ui/pantallaMain/Constantes.kt,5\5\55252182d0d7ce0f3fb5833dd6354626e95ec8a5
 {
 Kapp/src/androidTest/java/com/example/appnobasica/ExampleInstrumentedTest.kt,a\6\a6a3368cbc8896c948d40a4edb32ff718a8f25ad
-y
-Iapp/src/main/java/com/example/appnobasica/ui/pantallaMain/MainActivity.kt,f\2\f26b2ca94493b4461e66a467663cc127662061b9
 q
 Aapp/src/main/java/com/example/appnobasica/utils/StringProvider.kt,a\e\aed7a10c872cf3deaddd065a772fdc184d78fad1
 v
@@ -38,11 +36,13 @@ l
 <app/src/main/java/com/example/appnobasica/data/Repository.kt,6\a\6a34dd3174b9b8061c2d8937b9e473e696ca43db
 p
 @app/src/main/java/com/example/appnobasica/data/RespositoryDos.kt,1\6\16612afe2f38815164df6885558f5af79ec8f2d8
-
+ï¿½
 Qapp/src/main/java/com/example/appnobasica/domain/usecases/personas/GetPersonas.kt,8\4\84f8c8b9cf20b1e603ad6d1ca9c9099df76fbbd4
-‡
+ï¿½
 Wapp/src/main/java/com/example/appnobasica/domain/usecases/personas/AddPersonaUseCase.kt,1\8\18c761e4bae0a799800da0848233f0baf0074009
 r
 Bapp/src/main/java/com/example/appnobasica/domain/modelo/Persona.kt,3\9\399a12d088fb84b4e8a235f62b87047f7bf042dd
+y
+Iapp/src/main/java/com/example/appnobasica/ui/pantallaMain/MainActivity.kt,f\2\f26b2ca94493b4461e66a467663cc127662061b9
 z
 Japp/src/main/java/com/example/appnobasica/ui/pantallaMain/MainViewModel.kt,c\e\ce7977ca063a16ccb821816dd08090fe2ccfc3b7
