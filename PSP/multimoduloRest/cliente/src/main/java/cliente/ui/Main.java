@@ -1,14 +1,9 @@
 package cliente.ui;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import cliente.data.CacheAuthorization;
 import cliente.data.DaoEstupido;
-import cliente.data.network.ConfigurationSingleton_OkHttpClient;
 import jakarta.enterprise.inject.se.SeContainer;
 import jakarta.enterprise.inject.se.SeContainerInitializer;
-import lombok.SneakyThrows;
-
-import java.util.concurrent.CompletableFuture;
 
 public class Main {
 

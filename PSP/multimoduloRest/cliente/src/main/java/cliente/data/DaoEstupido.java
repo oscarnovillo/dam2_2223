@@ -5,7 +5,6 @@ import domain.modelo.Usuario;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.vavr.control.Either;
-import cliente.data.network.ConfigurationSingleton_OkHttpClient;
 import cliente.data.servicios.EstupidoAPI;
 import jakarta.inject.Inject;
 
