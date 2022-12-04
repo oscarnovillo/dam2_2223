@@ -10,18 +10,33 @@ import java.util.concurrent.CompletableFuture;
 
 public class Main {
 
-    @SneakyThrows
+
     public static void main(String[] args) {
 
 
-        CacheAuthorization ca = new CacheAuthorization();
-        ca.setUser("user");
-        ca.setPass("pass");
+//        CacheAuthorization ca = new CacheAuthorization();
+//        ca.setUser("user");
+//        ca.setPass("pass");
 
 
-        DaoEstupido dao = new DaoEstupido(ca);
+        DaoEstupido dao = new DaoEstupido();
 
-        dao.getAlumno()
+
+        dao.getLogin()
+                .subscribeOn(Schedulers.io())
+                .blockingSubscribe(either -> {
+                    if (either.isRight()) {
+                        System.out.println(either.get());
+
+                    } else if (either.isLeft()) {
+                        System.out.println(either.getLeft());
+
+                    }
+
+
+                });
+
+        dao.getUsuario()
                 .subscribeOn(Schedulers.io())
                 .blockingSubscribe(either -> {
                     if (either.isRight()) {
@@ -90,6 +105,8 @@ public class Main {
         System.out.println("FIN");
         ConfigurationSingleton_OkHttpClient.clientOK.connectionPool().evictAll();
 //        System.exit(-1);
+
+
 
     }
 

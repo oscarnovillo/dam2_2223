@@ -40,7 +40,7 @@ public class ConfigurationSingleton_OkHttpClient {
                     .readTimeout(Duration.of(10, ChronoUnit.MINUTES))
                     .callTimeout(Duration.of(10, ChronoUnit.MINUTES))
                     .connectTimeout(Duration.of(10, ChronoUnit.MINUTES))
-                    .addInterceptor(new AuthorizationInterceptor(cache))
+                    //.addInterceptor(new AuthorizationInterceptor(cache))
                     .connectionPool(new ConnectionPool(1, 1, TimeUnit.SECONDS))
                     // necesario para la sesion
                     .cookieJar(new JavaNetCookieJar(cookieManager))
@@ -52,15 +52,10 @@ public class ConfigurationSingleton_OkHttpClient {
                 public LocalDateTime deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
                     return LocalDateTime.parse(json.getAsJsonPrimitive().getAsString());
                 }
-            }).registerTypeAdapter(LocalDateTime.class, new JsonSerializer<LocalDateTime>() {
-                        @Override
-                        public JsonElement serialize(LocalDateTime localDateTime, Type type, JsonSerializationContext jsonSerializationContext) {
-                            return new JsonPrimitive(localDateTime.toString());
-                        }
-                    }
+            }).registerTypeAdapter(LocalDateTime.class, (JsonSerializer<LocalDateTime>) (localDateTime, type, jsonSerializationContext) -> new JsonPrimitive(localDateTime.toString())
             ).create();
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://localhost:7070/Servidor-1.0-SNAPSHOT/api/")
+                    .baseUrl("http://localhost:8080/miprimerREST-1.0-SNAPSHOT/privado/api/")
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
