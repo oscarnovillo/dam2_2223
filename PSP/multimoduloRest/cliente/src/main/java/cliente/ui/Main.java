@@ -4,6 +4,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import cliente.data.CacheAuthorization;
 import cliente.data.DaoEstupido;
 import cliente.data.network.ConfigurationSingleton_OkHttpClient;
+import jakarta.enterprise.inject.se.SeContainer;
+import jakarta.enterprise.inject.se.SeContainerInitializer;
 import lombok.SneakyThrows;
 
 import java.util.concurrent.CompletableFuture;
@@ -18,8 +20,25 @@ public class Main {
 //        ca.setUser("user");
 //        ca.setPass("pass");
 
+        SeContainerInitializer initializer = SeContainerInitializer.newInstance();
+        final SeContainer container = initializer.initialize();
 
-        DaoEstupido dao = new DaoEstupido();
+        DaoEstupido dao = container.select(DaoEstupido.class).get();
+
+
+        dao.getUsuario()
+                .subscribeOn(Schedulers.io())
+                .blockingSubscribe(either -> {
+                    if (either.isRight()) {
+                        System.out.println(either.get());
+
+                    } else if (either.isLeft()) {
+                        System.out.println(either.getLeft());
+
+                    }
+
+
+                });
 
 
         dao.getLogin()
@@ -102,9 +121,6 @@ public class Main {
 //
 //        }).join();
 
-        System.out.println("FIN");
-        ConfigurationSingleton_OkHttpClient.clientOK.connectionPool().evictAll();
-//        System.exit(-1);
 
 
 

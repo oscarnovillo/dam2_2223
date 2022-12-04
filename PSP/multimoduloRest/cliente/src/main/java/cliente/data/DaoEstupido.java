@@ -1,11 +1,13 @@
 package cliente.data;
 
+import com.google.gson.Gson;
 import domain.modelo.Usuario;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.vavr.control.Either;
 import cliente.data.network.ConfigurationSingleton_OkHttpClient;
 import cliente.data.servicios.EstupidoAPI;
+import jakarta.inject.Inject;
 
 import java.util.List;
 
@@ -13,41 +15,40 @@ public class DaoEstupido extends DaoGenerics{
 
 
     private CacheAuthorization cache;
+    private EstupidoAPI estupidoAPI;
 
-    public DaoEstupido() {
-        this.cache = new CacheAuthorization();
+
+    @Inject
+    public DaoEstupido(EstupidoAPI estupidoAPI, Gson gson) {
+        super(gson);
+        this.estupidoAPI = estupidoAPI;
     }
 
-    public Single<Either<String, List<Usuario>>> getUsuario(){
-        EstupidoAPI estu = ConfigurationSingleton_OkHttpClient.getInstance(cache).create(EstupidoAPI.class);
 
-        return safeSingleApicall(estu.getUsers())
+    public Single<Either<String, List<Usuario>>> getUsuario(){
+
+
+        return safeSingleApicall(estupidoAPI.getUsers())
                 //.map(either -> either.map(alumno -> alumno.setNombre("mapeado")))
                 .subscribeOn(Schedulers.io());
     }
 
     public Single<Either<String, Boolean>> getLogin(){
-        EstupidoAPI estu = ConfigurationSingleton_OkHttpClient.getInstance(cache).create(EstupidoAPI.class);
-
-        return safeSingleApicall(estu.getLogin())
+        return safeSingleApicall(estupidoAPI.getLogin())
                 //.map(either -> either.map(alumno -> alumno.setNombre("mapeado")))
                 .subscribeOn(Schedulers.io());
     }
 
 
     public Single<Either<String,String>> getJwt(){
-        EstupidoAPI estu = ConfigurationSingleton_OkHttpClient.getInstance(cache).create(EstupidoAPI.class);
-
-        return safeSingleApicall(estu.getJWT())
+        return safeSingleApicall(estupidoAPI.getJWT())
                 //.map(either -> either.map(alumno -> alumno.setNombre("mapeado")))
                 .subscribeOn(Schedulers.io());
 
     }
 
     public Single<Either<String,String>> getVerify(){
-        EstupidoAPI estu = ConfigurationSingleton_OkHttpClient.getInstance(cache).create(EstupidoAPI.class);
-
-        return safeSingleApicall(estu.getVerify())
+        return safeSingleApicall(estupidoAPI.getVerify())
                 //.map(either -> either.map(alumno -> alumno.setNombre("mapeado")))
                 .subscribeOn(Schedulers.io());
 

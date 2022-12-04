@@ -1,17 +1,29 @@
 package cliente.data;
 
-import com.google.gson.Gson;
+import com.google.gson.*;
+import domain.errores.ApiError;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.vavr.control.Either;
+import jakarta.inject.Inject;
 import okhttp3.MediaType;
 import retrofit2.Call;
 import retrofit2.HttpException;
 import retrofit2.Response;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 abstract class DaoGenerics {
+
+
+    private Gson gson;
+
+    @Inject
+    protected DaoGenerics(Gson gson) {
+        this.gson = gson;
+    }
 
     public <T> Either<String, T> safeApicall(Call<T> call) {
         Either<String, T> resultado = null;
@@ -40,11 +52,11 @@ abstract class DaoGenerics {
                     Either<String, T> error = Either.left("Error de comunicacion");
 
                     if (throwable instanceof HttpException) {
-                        ((HttpException) throwable).code();
+                        int code =  ((HttpException) throwable).code();
                         if (Objects.equals(((HttpException) throwable).response().errorBody().contentType(), MediaType.get("application/json"))) {
-                            Gson g = new Gson();
+                            ApiError api = gson.fromJson(((HttpException) throwable).response().errorBody().charStream(), ApiError.class);
+                            error = Either.left(code + api.getMessage());
 
-                            error = Either.left("No se que decir");
 
                             //error = Either.right(T);
                         } else {
