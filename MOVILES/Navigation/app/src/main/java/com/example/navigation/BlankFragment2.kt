@@ -5,15 +5,18 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.onNavDestinationSelected
 import com.example.navigation.databinding.BlankFragmentBinding
 import com.example.navigation.databinding.FragmentBlankBinding
 
-class BlankFragment2 : Fragment() {
+class BlankFragment2 : Fragment(), MenuProvider {
 
     private var _binding : BlankFragmentBinding? = null
     private val binding get() = _binding!!
@@ -22,7 +25,9 @@ class BlankFragment2 : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
     }
 
     override fun onCreateView(
@@ -41,8 +46,8 @@ class BlankFragment2 : Fragment() {
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_dos, menu)
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.menu_dos, menu)
 
         val actionSearch = menu.findItem(R.id.search).actionView as SearchView
 
@@ -64,12 +69,8 @@ class BlankFragment2 : Fragment() {
         })
     }
 
-
-
-
-
-    override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
-        when (menuItem.itemId) {
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
             R.id.nuevo -> {
                 // Handle favorite icon press
                 //menuItem.onNavDestinationSelected(navController)
@@ -88,7 +89,6 @@ class BlankFragment2 : Fragment() {
             }
             else -> false
         }
-        return super.onOptionsItemSelected(menuItem)
     }
 
 }

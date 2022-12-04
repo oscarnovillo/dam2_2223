@@ -26,8 +26,6 @@ public class FiltroHorarioJAX implements ContainerRequestFilter {
 
         if (request.getSession().getAttribute("LOGIN")==null)
         {
-            if (request.get)
-
             containerRequestContext.abortWith(Response.status(Response.Status.FORBIDDEN)
                     .entity(ApiError.builder().message("error de filtro").fecha(LocalDateTime.now()).build())
                     .type(MediaType.APPLICATION_JSON_TYPE).build());
