@@ -1,4 +1,4 @@
-package jakarta.errores;
+package miprimerRest.jakarta.errores;
 
 import domain.errores.ApiError;
 import domain.modelo.errores.CustomException;

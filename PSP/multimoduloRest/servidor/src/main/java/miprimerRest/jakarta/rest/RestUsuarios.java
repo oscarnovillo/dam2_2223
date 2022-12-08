@@ -1,4 +1,4 @@
-package jakarta.rest;
+package miprimerRest.jakarta.rest;
 
 
 
@@ -7,7 +7,7 @@ import dao.modelo.UsuarioEntity;
 import io.vavr.control.Either;
 import jakarta.annotation.security.RolesAllowed;
 import domain.errores.ApiError;
-import jakarta.filtros.Secure;
+import miprimerRest.jakarta.filtros.Secure;
 import jakarta.inject.Inject;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.ws.rs.*;

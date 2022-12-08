@@ -1,4 +1,4 @@
-package jakarta.filtros;
+package miprimerRest.jakarta.filtros;
 
 import jakarta.ws.rs.NameBinding;
 

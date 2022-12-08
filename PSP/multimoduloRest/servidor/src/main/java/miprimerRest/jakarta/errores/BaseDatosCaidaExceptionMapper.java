@@ -1,7 +1,7 @@
-package jakarta.errores;
+package miprimerRest.jakarta.errores;
 
 import domain.errores.ApiError;
-import domain.modelo.errores.NotFoundException;
+import domain.modelo.errores.BaseDatosCaidaException;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
@@ -10,11 +10,13 @@ import jakarta.ws.rs.ext.Provider;
 import java.time.LocalDateTime;
 
 @Provider
-public class NotFoundExceptionMapper implements ExceptionMapper<NotFoundException> {
+public class BaseDatosCaidaExceptionMapper  implements ExceptionMapper<BaseDatosCaidaException> {
 
-    public Response toResponse(NotFoundException exception) {
+    public Response toResponse(BaseDatosCaidaException exception) {
+
+
         ApiError apiError = new ApiError(exception.getMessage(), LocalDateTime.now());
-        return Response.status(Response.Status.NOT_FOUND).entity(apiError)
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(apiError)
                 .type(MediaType.APPLICATION_JSON_TYPE).build();
     }
 }

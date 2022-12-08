@@ -1,4 +1,4 @@
-package jakarta.rest;
+package miprimerRest.jakarta.rest;
 
 
 import dao.DaoErrores;

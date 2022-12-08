@@ -1,4 +1,4 @@
-package jakarta.di;
+package miprimerRest.jakarta.di;
 
 import jakarta.enterprise.inject.Produces;
 import jakarta.json.bind.Jsonb;
