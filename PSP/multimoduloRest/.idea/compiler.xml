@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="cliente" />
         <module name="servidor" />
+        <module name="seguridad" />
         <module name="domain" />
         <module name="miprimerREST" />
       </profile>

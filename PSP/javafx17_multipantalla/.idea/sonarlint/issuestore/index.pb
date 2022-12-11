@@ -11,25 +11,5 @@ Q
 !src/main/java/ui/main/MainFX.java,2\e\2e7801e75bc7d7b888b07031d0746a50f31ff377
 m
 =src/main/java/ui/pantallas/principal/PrincipalController.java,6\8\6854908843d482996cd7f7c9ccd44ffdc547ca45
-N
-src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
 i
 9src/main/java/ui/pantallas/listado/ListadoController.java,5\2\527c788db3eed07414173e76ce34ec647d22d6e2
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
-h
-8src/main/java/ui/pantallas/listado/ListadoViewModel.java,6\2\62d40df670d5a9f2819ac52c201af73ee8c04af1
-d
-4src/main/java/ui/pantallas/listado/ListadoState.java,1\4\140fcbb072ea50430ee00d3ece56c34ea9f8142c
-X
-(src/main/java/dao/retrofit/Cantante.java,9\9\99e5541bcfbeeede378b23eb827d7dd7a4c6ac4a
-R
-"src/main/java/dao/DaoGenerics.java,f\c\fce9ee0ccdbef7c52b924125cd86f427ef52b0e0
-d
-4src/main/java/domain/usecases/LoadCromosUseCase.java,d\3\d3a4c81dd8e6d5b3ad8abfc3c7e1dece4fb7a9cf
-P
- src/main/java/dao/DaoCromos.java,3\f\3f683ea459b983d3eb6782012406f74f245b4ee4
-S
-#src/main/java/ui/main/DIJavafx.java,5\3\535169814ef8dd70f8f23c95a2032d8268f48d6d
-`
-0src/main/java/dao/retrofit/ProducesRetrofit.java,4\0\4070be6784772f662f3d578d59b9a40234f87106

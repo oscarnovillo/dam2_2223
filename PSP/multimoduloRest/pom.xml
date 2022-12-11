@@ -11,6 +11,7 @@
         <module>cliente</module>
         <module>servidor</module>
         <module>domain</module>
+        <module>seguridad</module>
     </modules>
     <packaging>pom</packaging>
 

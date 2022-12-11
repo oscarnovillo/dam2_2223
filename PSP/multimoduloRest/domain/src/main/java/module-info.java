@@ -5,4 +5,6 @@ module domain {
 
     exports domain.modelo;
     exports domain.errores;
+
+    opens domain.modelo;
 }

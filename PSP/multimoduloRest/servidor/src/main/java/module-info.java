@@ -13,8 +13,10 @@ module miprimerREST {
     requires org.yaml.snakeyaml;
     requires java.sql;
     requires domain;
+//    requires seguridad;
     requires modelmapper;
     requires java.net.http;
+    requires seguridad;
 
 
     //requires domain.errores;
