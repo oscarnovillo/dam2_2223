@@ -4,6 +4,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import cliente.data.DaoEstupido;
 import jakarta.enterprise.inject.se.SeContainer;
 import jakarta.enterprise.inject.se.SeContainerInitializer;
+import okhttp3.Credentials;
 
 public class Main {
 
@@ -36,7 +37,7 @@ public class Main {
                 });
 
 
-        dao.getLogin()
+        dao.getLogin(Credentials.basic("admin", "admin"))
                 .subscribeOn(Schedulers.io())
                 .blockingSubscribe(either -> {
                     if (either.isRight()) {

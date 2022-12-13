@@ -8,6 +8,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.SecurityContext;
 
 @Path("/login")
 
@@ -20,9 +21,14 @@ public class RestLogin {
     @Context
     HttpServletRequest request;
 
+    @Context
+    SecurityContext securityContext;
+
     @GET
     public Boolean getLogin() {
 
+        securityContext.getUserPrincipal().getName();
+        securityContext.isUserInRole("admin");
         request.getSession().setAttribute("LOGIN", true);
         return true;
     }

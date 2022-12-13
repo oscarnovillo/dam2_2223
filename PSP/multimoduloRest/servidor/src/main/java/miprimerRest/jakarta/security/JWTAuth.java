@@ -6,6 +6,7 @@ import jakarta.security.enterprise.AuthenticationException;
 import jakarta.security.enterprise.AuthenticationStatus;
 import jakarta.security.enterprise.authentication.mechanism.http.HttpAuthenticationMechanism;
 import jakarta.security.enterprise.authentication.mechanism.http.HttpMessageContext;
+import jakarta.security.enterprise.credential.BasicAuthenticationCredential;
 import jakarta.security.enterprise.credential.UsernamePasswordCredential;
 import jakarta.security.enterprise.identitystore.CredentialValidationResult;
 import jakarta.servlet.http.HttpServletRequest;
@@ -36,13 +37,15 @@ public class JWTAuth implements HttpAuthenticationMechanism
             String[] valores = header.split(" ");
 
             if (valores[0].equalsIgnoreCase("Basic")) {
-                String userPass = new String(Base64.getUrlDecoder().decode(valores[1]));
-                String[] userPassSeparado = userPass.split(":");
-                c = identity.validate(new UsernamePasswordCredential(userPassSeparado[0]
-                        , userPassSeparado[1]));
+//                String userPass = new String(Base64.getUrlDecoder().decode(valores[1]));
+//                String[] userPassSeparado = userPass.split(":");
+//                c = identity.validate(new UsernamePasswordCredential(userPassSeparado[0]
+//                        , userPassSeparado[1]));
+
+                c = identity.validate(new BasicAuthenticationCredential(valores[1]));
 
                 if (c.getStatus() == CredentialValidationResult.Status.VALID) {
-                    //httpServletRequest.getSession().setAttribute("LOGIN", c);
+                    httpServletRequest.getSession().setAttribute("USERLOGIN", c);
                     //generar token
 
 
@@ -56,6 +59,11 @@ public class JWTAuth implements HttpAuthenticationMechanism
 
 
             }
+            else if (valores[0].equalsIgnoreCase("Logout")) {
+                httpServletRequest.getSession().removeAttribute("USERLOGIN");
+                httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
+            }
+
             //  else del bearer, bearer, bearer,beaer Ijust conat to wiat to vb warer
 
             //vlidarlo
@@ -63,8 +71,8 @@ public class JWTAuth implements HttpAuthenticationMechanism
         }
         else
         {
-            if (httpServletRequest.getSession().getAttribute("LOGIN")!=null)
-                c = (CredentialValidationResult)httpServletRequest.getSession().getAttribute("LOGIN");
+            if (httpServletRequest.getSession().getAttribute("USERLOGIN")!=null)
+                c = (CredentialValidationResult)httpServletRequest.getSession().getAttribute("USERLOGIN");
         }
 
         if (c.getStatus().equals(CredentialValidationResult.Status.INVALID))

@@ -7,7 +7,8 @@ import dao.modelo.UsuarioEntity;
 import io.vavr.control.Either;
 import jakarta.annotation.security.RolesAllowed;
 import domain.errores.ApiError;
-import miprimerRest.jakarta.filtros.Secure;
+import miprimerRest.jakarta.common.Constantes;
+import miprimerRest.jakarta.filtros.RoleUser;
 import jakarta.inject.Inject;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.ws.rs.*;
@@ -73,7 +74,7 @@ public class RestUsuarios {
     }
 
     @GET
-    @RolesAllowed("ADMIN")
+    @RoleUser
     @Path("/{id}")
     public Response getUnUsuario(@PathParam("id") String id,
                                 @HeaderParam("kk") String head) {
@@ -93,7 +94,7 @@ public class RestUsuarios {
     }
 
     @GET
-    @Secure
+    @RolesAllowed({Constantes.ROLE_ADMIN,"users"})
     public List<Usuario> getAllUsuario() {
         return su.dameTodos();
     }

@@ -1,37 +1,36 @@
 package miprimerRest.jakarta.filtros;
 
-import jakarta.security.enterprise.identitystore.Pbkdf2PasswordHash;
+import jakarta.inject.Inject;
+import jakarta.security.enterprise.SecurityContext;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.ws.rs.core.Context;
 
 import java.io.IOException;
 
-@WebFilter(filterName = "Filter",urlPatterns = {"/privados/*"})
-public class FilterRubenVeBien implements Filter {
+@WebFilter(filterName = "FilterRoleUser",urlPatterns = {"/ServletHashes"})
+public class FilterRoleUser implements Filter {
+
+    private final SecurityContext securityContext;
 
 
-
-
-
-    public void init(FilterConfig config) throws ServletException {
+    @Inject
+    public FilterRoleUser(@Context SecurityContext securityContext) {
+        this.securityContext = securityContext;
     }
 
-    public void destroy() {
-    }
+
+
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
 
-
-        if (((HttpServletRequest)request).getSession().getAttribute("LOGIN")!=null)
+        if (securityContext.isCallerInRole("user") && ((HttpServletRequest)request).getMethod().equals("GET"))
             chain.doFilter(request, response);
         else
             ((HttpServletResponse)response).sendError(HttpServletResponse.SC_FORBIDDEN,"FORBIDEN");
-
-
-
 
     }
 }

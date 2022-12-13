@@ -1,6 +1,7 @@
 package miprimerRest.jakarta.servlet;
 
 import jakarta.inject.Inject;
+import jakarta.security.enterprise.SecurityContext;
 import jakarta.security.enterprise.identitystore.Pbkdf2PasswordHash;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -13,10 +14,13 @@ public class ServletHashes extends HttpServlet {
 
     private Pbkdf2PasswordHash passwordHash;
 
+        private SecurityContext securityContext;
+
 
     @Inject
-    public ServletHashes(Pbkdf2PasswordHash passwordHash) {
+    public ServletHashes(Pbkdf2PasswordHash passwordHash,  SecurityContext securityContext) {
         this.passwordHash = passwordHash;
+        this.securityContext = securityContext;
     }
 
     @Override
@@ -24,6 +28,7 @@ public class ServletHashes extends HttpServlet {
 
         request.getSession().setAttribute("LOGIN",true);
 
+        response.getWriter().println(securityContext.getCallerPrincipal());
 
         String password = passwordHash.generate("1234".toCharArray());
         response.getWriter().println(password);
