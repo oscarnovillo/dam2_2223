@@ -17,13 +17,13 @@ public class ServletSeguridad extends HttpServlet {
 
     private Pbkdf2PasswordHash passwordHash;
 
-    //private final Encriptacion encriptacion;
+    private final Encriptacion encriptacion;
 
 
     @Inject
-    public ServletSeguridad(Pbkdf2PasswordHash passwordHash) {
+    public ServletSeguridad(Pbkdf2PasswordHash passwordHash, Encriptacion encriptacion) {
         this.passwordHash = passwordHash;
-       // this.encriptacion = encriptacion;
+        this.encriptacion = encriptacion;
     }
 
     @Override
@@ -34,12 +34,12 @@ public class ServletSeguridad extends HttpServlet {
         String originalString = "howtodoinjava.com";
 
 
-//        String encryptedString = encriptacion.encriptar(originalString, sSecretKey);
-//        String decryptedString = encriptacion.desencriptar(encryptedString, sSecretKey);
+        String encryptedString = encriptacion.encriptar(originalString, sSecretKey);
+        String decryptedString = encriptacion.desencriptar(encryptedString, sSecretKey);
 
-//        response.getWriter().println(originalString);
-//        response.getWriter().println(encryptedString);
-//        response.getWriter().println(decryptedString);
+        response.getWriter().println(originalString);
+        response.getWriter().println(encryptedString);
+        response.getWriter().println(decryptedString);
 
 
     }
