@@ -16,6 +16,13 @@
         <action
             android:id="@+id/action_primerFragment_to_segundoFragment"
             app:destination="@id/segundoFragment" />
+        <argument
+            android:name="mensaje"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="ShowAppBar"
+            android:defaultValue="true" />
     </fragment>
     <fragment
         android:id="@+id/segundoFragment"
@@ -25,6 +32,9 @@
         <action
             android:id="@+id/meVoyDeSegundoATercero"
             app:destination="@id/tercerFragment" />
+        <action
+            android:id="@+id/action_segundoFragment_to_primerFragment"
+            app:destination="@id/primerFragment" />
     </fragment>
     <fragment
         android:id="@+id/tercerFragment"
@@ -34,5 +44,9 @@
         <action
             android:id="@+id/action_tercerFragment_to_primerFragment"
             app:destination="@id/primerFragment" />
+        <argument
+            android:name="mensaje"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 </navigation>

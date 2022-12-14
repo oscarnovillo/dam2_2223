@@ -56,7 +56,7 @@ dependencies {
 
 
     //by viewModels
-    implementation "androidx.fragment:fragment-ktx:1.5.4"
+    implementation "androidx.fragment:fragment-ktx:1.5.5"
 
 //    // Room libraries
 //    implementation "androidx.room:room-runtime:$room_version"

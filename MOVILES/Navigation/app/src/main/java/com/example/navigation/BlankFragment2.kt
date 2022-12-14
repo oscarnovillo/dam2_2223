@@ -25,8 +25,7 @@ class BlankFragment2 : Fragment(), MenuProvider {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
 
     }
 
@@ -42,7 +41,8 @@ class BlankFragment2 : Fragment(), MenuProvider {
         super.onViewCreated(view, savedInstanceState)
         val args : BlankFragment2Args by navArgs()
         binding.texto.setText(args.persona?.nombre ?: "nulo")
-
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
 

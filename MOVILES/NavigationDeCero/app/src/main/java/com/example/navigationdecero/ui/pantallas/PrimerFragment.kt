@@ -33,7 +33,7 @@ class PrimerFragment : Fragment() {
                 findNavController().navigate(action)
             }
             irTercero.setOnClickListener{
-                val action = PrimerFragmentDirections.actionPrimerFragmentToTercerFragment()
+                val action = PrimerFragmentDirections.actionPrimerFragmentToTercerFragment(null)
                 findNavController().navigate(action)
 
             }

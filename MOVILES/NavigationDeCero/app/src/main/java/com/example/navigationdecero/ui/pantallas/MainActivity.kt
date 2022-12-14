@@ -1,20 +1,31 @@
 package com.example.navigationdecero.ui.pantallas
 
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.*
 import com.example.navigationdecero.R
 import com.example.navigationdecero.databinding.ActivityMainBinding
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var navController: NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_appbar, menu)
+        return true
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,9 +34,67 @@ class MainActivity : AppCompatActivity() {
 
         with(binding) {
 //
-            val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+            setSupportActionBar(topAppBar)
+            val navHostFragment =
+                supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
             navController = navHostFragment.findNavController()
-            setupActionBarWithNavController(navController, AppBarConfiguration(navController.graph))
+            appBarConfiguration = AppBarConfiguration(setOf(
+                R.id.primerFragment, R.id.tercerFragment
+            ), drawerLayout)
+            setupActionBarWithNavController(navController, appBarConfiguration)
+            navView.setupWithNavController(navController)
+
+            topAppBar.setNavigationOnClickListener {
+                Log.i("TAG",navController.currentDestination?.id.toString() ?: "null" )
+                drawerLayout.open()
+            }
+
+            topAppBar.setOnMenuItemClickListener { menuItem ->
+                 when (menuItem.itemId) {
+                    R.id.segundoFragment -> {
+                        // Handle favorite icon press
+                        menuItem.onNavDestinationSelected(navController)
+                        true
+                    }
+                    R.id.tercerFragment -> {
+                        // Handle search icon press
+                        val action = SegundoFragmentDirections.meVoyDeSegundoATercero("desde primero")
+                        navController.navigate(action)
+                        true
+                    }
+                    R.id.search -> {
+                        // Handle search icon press
+                        true
+                    }
+                    else -> false
+                }
+            }
+
+
+            topAppBar.navigationIcon = getDrawable(R.drawable.ic_baseline_menu_24)
+
+            navController.addOnDestinationChangedListener { _, destination, arguments ->
+                topAppBar.isVisible = arguments?.getBoolean("ShowAppBar", false) == true
+                topAppBar.navigationIcon = getDrawable(R.drawable.ic_baseline_menu_24)
+
+                when (destination.id){
+                    R.id.segundoFragment -> {
+                        topAppBar.visibility = View.VISIBLE
+                        topAppBar.menu.findItem(R.id.search).isVisible = true
+                    }
+                    R.id.tercerFragment -> {
+                        topAppBar.visibility = View.VISIBLE
+                        topAppBar.menu.findItem(R.id.search).isVisible = false
+                    }
+                    R.id.primerFragment -> {
+                        //topAppBar.navigationIcon = getDrawable(R.drawable.ic_launcher_background)
+                    }
+                }
+            }
+
+
+            //supportActionBar?.setHomeButtonEnabled(true)
+            //topAppBar.visibility = android.view.View.GONE
 
 
         }
