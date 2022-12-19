@@ -49,7 +49,9 @@ public class JWTAuth implements HttpAuthenticationMechanism
                     //generar token
 
 
+
                     //añadir al response
+//                    response.add
 
 
                 }

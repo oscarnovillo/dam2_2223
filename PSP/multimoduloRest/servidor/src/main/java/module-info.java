@@ -18,6 +18,7 @@ module miprimerREST {
 
     requires modelmapper;
     requires java.net.http;
+    requires jjwt.api;
 
 
     //requires domain.errores;
