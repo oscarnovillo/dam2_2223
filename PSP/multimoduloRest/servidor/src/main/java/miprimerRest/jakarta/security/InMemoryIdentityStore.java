@@ -1,6 +1,9 @@
 package miprimerRest.jakarta.security;
 
+import domain.servicios.ServiciosUsuarios;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import jakarta.security.enterprise.credential.BasicAuthenticationCredential;
 import jakarta.security.enterprise.credential.Credential;
 import jakarta.security.enterprise.credential.UsernamePasswordCredential;
@@ -13,13 +16,22 @@ import java.util.Set;
 
 import static jakarta.security.enterprise.identitystore.CredentialValidationResult.INVALID_RESULT;
 
-@ApplicationScoped
+
 public class InMemoryIdentityStore implements IdentityStore {
+
+    private final ServiciosUsuarios serviciosUsuarios;
 
     @Override
     public int priority() {
         return 10;
     }
+
+
+    @Inject
+    public InMemoryIdentityStore(ServiciosUsuarios serviciosUsuarios) {
+        this.serviciosUsuarios = serviciosUsuarios;
+    }
+
 
     @Override
     public CredentialValidationResult validate(Credential credential) {

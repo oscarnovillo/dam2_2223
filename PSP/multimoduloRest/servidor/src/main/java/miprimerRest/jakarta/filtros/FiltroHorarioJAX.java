@@ -22,7 +22,11 @@ public class FiltroHorarioJAX implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext containerRequestContext) throws IOException {
+        jakarta.ws.rs.core.SecurityContext securityContext = containerRequestContext.getSecurityContext();
 
+        if (securityContext.getUserPrincipal()!=null) {
+            String name = securityContext.getUserPrincipal().getName();
+        }
 
         if (request.getSession().getAttribute("LOGIN")==null)
         {
