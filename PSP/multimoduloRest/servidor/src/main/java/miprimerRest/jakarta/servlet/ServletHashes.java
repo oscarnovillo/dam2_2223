@@ -28,6 +28,7 @@ public class ServletHashes extends HttpServlet {
 
         request.getSession().setAttribute("LOGIN",true);
 
+
         response.getWriter().println(securityContext.getCallerPrincipal());
 
         String password = passwordHash.generate("1234".toCharArray());

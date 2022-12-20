@@ -2,6 +2,7 @@ package cliente.data.servicios;
 
 import domain.modelo.Usuario;
 import io.reactivex.rxjava3.core.Single;
+import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -15,7 +16,7 @@ public interface EstupidoAPI {
     Single<List<Usuario>> getUsers();
 
     @GET("login")
-    Single<Boolean> getLogin(@Header("Authorization") String basicAuthorization);
+    Single<Response<Void>> getLogin(@Header("Authorization") String basicAuthorization);
 
     @GET("alumno/filtro")
     Single<String> getJWT();

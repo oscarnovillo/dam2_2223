@@ -32,8 +32,8 @@ public class DaoEstupido extends DaoGenerics{
                 .subscribeOn(Schedulers.io());
     }
 
-    public Single<Either<String, Boolean>> getLogin(String headerBasic ){
-        return safeSingleApicall(estupidoAPI.getLogin( headerBasic))
+    public Single<Either<String, String>> getLogin(String headerBasic ){
+        return safeSingleVoidApicall(estupidoAPI.getLogin( headerBasic))
                 //.map(either -> either.map(alumno -> alumno.setNombre("mapeado")))
                 .subscribeOn(Schedulers.io());
     }

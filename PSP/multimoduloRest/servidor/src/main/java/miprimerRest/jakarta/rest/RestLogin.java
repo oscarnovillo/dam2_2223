@@ -8,6 +8,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.SecurityContext;
 
 @Path("/login")
@@ -25,12 +26,11 @@ public class RestLogin {
     SecurityContext securityContext;
 
     @GET
-    public Boolean getLogin() {
+    public Response getLogin() {
 
-        securityContext.getUserPrincipal().getName();
         securityContext.isUserInRole("admin");
         request.getSession().setAttribute("LOGIN", true);
-        return true;
+        return Response.status(Response.Status.NO_CONTENT).build();
     }
 
 

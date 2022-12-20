@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static jakarta.security.enterprise.identitystore.CredentialValidationResult.INVALID_RESULT;
+import static jakarta.security.enterprise.identitystore.CredentialValidationResult.NOT_VALIDATED_RESULT;
 
 
 public class InMemoryIdentityStore implements IdentityStore {
@@ -51,10 +52,13 @@ public class InMemoryIdentityStore implements IdentityStore {
                 case "admin" -> new CredentialValidationResult("admin", Set.of("admin"));// Collections.singleton("ADMIN"));
                 case "paco" -> new CredentialValidationResult("paco", Collections.singleton("user"));
                 case "user" -> new CredentialValidationResult("user", Collections.singleton("user"));
+                case "usuarioSinActivar" -> NOT_VALIDATED_RESULT;
                 default -> INVALID_RESULT;
             };
 
         }
+
+
         return INVALID_RESULT;
     }
 

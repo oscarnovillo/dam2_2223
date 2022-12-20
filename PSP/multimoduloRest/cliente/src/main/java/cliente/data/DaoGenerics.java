@@ -1,6 +1,6 @@
 package cliente.data;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
 import domain.errores.ApiError;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -11,8 +11,6 @@ import retrofit2.Call;
 import retrofit2.HttpException;
 import retrofit2.Response;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 abstract class DaoGenerics {
@@ -52,7 +50,7 @@ abstract class DaoGenerics {
                     Either<String, T> error = Either.left("Error de comunicacion");
 
                     if (throwable instanceof HttpException) {
-                        int code =  ((HttpException) throwable).code();
+                        int code = ((HttpException) throwable).code();
                         if (Objects.equals(((HttpException) throwable).response().errorBody().contentType(), MediaType.get("application/json"))) {
                             ApiError api = gson.fromJson(((HttpException) throwable).response().errorBody().charStream(), ApiError.class);
                             error = Either.left(code + api.getMessage());
@@ -68,4 +66,16 @@ abstract class DaoGenerics {
 
 
     }
+
+    public Single<Either<String, String>> safeSingleVoidApicall(Single<Response<Void>> call) {
+        return call.map(response -> {
+                    var retorno = Either.right("OK").mapLeft(Object::toString);
+                    if (!response.isSuccessful()) {
+                        retorno = Either.left(response.message());
+                    }
+                    return retorno;
+                })
+                .subscribeOn(Schedulers.io());
+    }
+
 }

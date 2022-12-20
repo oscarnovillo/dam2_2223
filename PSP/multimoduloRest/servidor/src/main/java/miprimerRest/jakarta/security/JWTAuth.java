@@ -77,11 +77,13 @@ public class JWTAuth implements HttpAuthenticationMechanism
                 c = (CredentialValidationResult)httpServletRequest.getSession().getAttribute("USERLOGIN");
         }
 
-        if (c.getStatus().equals(CredentialValidationResult.Status.INVALID))
+        if (!c.getStatus().equals(CredentialValidationResult.Status.VALID) )
         {
-
+            httpServletRequest.setAttribute("status",c.getStatus());
             return httpMessageContext.doNothing();
         }
+
+
         return httpMessageContext.notifyContainerAboutLogin(c);
     }
 }
