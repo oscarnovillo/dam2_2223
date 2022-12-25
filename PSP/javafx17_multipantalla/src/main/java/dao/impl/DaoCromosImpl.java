@@ -68,7 +68,7 @@ public class DaoCromosImpl implements DaoCromos {
                 }
                 respuesta = Either.right(joker);
             } else {
-                r.errorBody().string()
+                r.errorBody().string();
 
                 respuesta = Either.left(r.message());
             }
