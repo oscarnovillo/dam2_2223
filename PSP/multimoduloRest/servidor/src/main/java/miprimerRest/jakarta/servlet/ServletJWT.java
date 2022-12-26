@@ -19,6 +19,9 @@ import java.time.ZoneId;
 import java.util.Date;
 
 @WebServlet(name = "ServletJWT", value = "/JWT")
+@ServletSecurity(
+        @HttpConstraint(rolesAllowed = {"admin"})
+)
 public class ServletJWT extends HttpServlet {
     @Override
     @SneakyThrows
