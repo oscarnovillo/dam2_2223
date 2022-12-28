@@ -28,7 +28,7 @@ public class ServletJWT extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // clave aleatoria
-        //Key key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+        Key key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
 
         // clave fija

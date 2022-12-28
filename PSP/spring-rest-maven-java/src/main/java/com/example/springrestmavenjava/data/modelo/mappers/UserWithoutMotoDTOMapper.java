@@ -1,4 +1,4 @@
-package com.example.springrestmavenjava.spring.mappers;
+package com.example.springrestmavenjava.data.modelo.mappers;
 
 
 import com.example.springrestmavenjava.data.modelo.UserEntity;

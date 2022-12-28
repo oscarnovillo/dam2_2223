@@ -5,11 +5,11 @@ import com.example.springrestmavenjava.data.modelo.UserEntity;
 import com.example.springrestmavenjava.domain.exceptions.NotFoundException;
 import com.example.springrestmavenjava.domain.modelo.User;
 import com.example.springrestmavenjava.domain.modelo.UserWithoutMotoDTO;
-import com.example.springrestmavenjava.spring.mappers.UserMapper;
-import com.example.springrestmavenjava.spring.mappers.UserWithoutMotoDTOMapper;
+import com.example.springrestmavenjava.data.modelo.mappers.UserMapper;
+import com.example.springrestmavenjava.data.modelo.mappers.UserWithoutMotoDTOMapper;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -71,6 +71,7 @@ public class UserServices {
     }
 
 
+    @Secured("ADMIN")
     public void deleteUser(Long id) {
 
         try {

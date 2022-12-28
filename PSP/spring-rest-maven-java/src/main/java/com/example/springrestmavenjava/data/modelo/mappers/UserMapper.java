@@ -1,11 +1,9 @@
-package com.example.springrestmavenjava.spring.mappers;
+package com.example.springrestmavenjava.data.modelo.mappers;
 
 
 import com.example.springrestmavenjava.data.modelo.UserEntity;
 import com.example.springrestmavenjava.domain.modelo.User;
 import org.springframework.stereotype.Component;
-
-import java.util.stream.Collectors;
 
 @Component
 public class UserMapper {

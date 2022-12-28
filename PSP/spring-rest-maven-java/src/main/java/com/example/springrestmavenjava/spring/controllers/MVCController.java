@@ -10,15 +10,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MVCController {
 
 
-   @GetMapping("/")
-   public String index(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-       // get parameter name and send it to thymeleaf
+    @GetMapping("/")
+    public String index(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
+        // get parameter name and send it to thymeleaf
 
-       model.addAttribute("name", name);
-       if (name.equals("World")) {
-           throw new NotFoundException("No se ha encontrado el usuario");
-       }
-       return "index";
-   }
+        model.addAttribute("name", name);
+        if (name.equals("World")) {
+            throw new NotFoundException("No se ha encontrado el usuario");
+        }
+        return "index";
+    }
+
 
 }
