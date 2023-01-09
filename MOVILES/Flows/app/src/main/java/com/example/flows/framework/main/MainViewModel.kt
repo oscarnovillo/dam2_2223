@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.flows.data.MovieRepository
 import com.example.flows.framework.main.MainContract.State
+import com.example.flows.framework.utils.Utils
 import com.example.flows.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -45,28 +46,43 @@ class MainViewModel @Inject constructor(
 
     private fun pedirDatos() {
         viewModelScope.launch {
-            movieRepository.fetchTrendingMovies()
-                .catch(action = { cause -> _uiError.send(cause.message ?: "") })
-                .collect { result ->
-                    when (result) {
-                        is NetworkResult.Error -> {
-                            _uiState.update { it.copy(error = result.message) }
-                            //_uiError.send(result.message ?: "Error")
-                        }
-                        is NetworkResult.Loading -> _uiState.update { it.copy(isLoading = true) }
-                        is NetworkResult.Success -> _uiState.update {
-                            it.copy(
-                                movies = result.data ?: emptyList(), isLoading = false
-                            )
+            if (Utils.hasInternetConnection(context = appContext)) {
+                movieRepository.fetchTrendingMovies()
+                    .catch(action = { cause -> _uiError.send(cause.message ?: "") })
+                    .collect { result ->
+                        when (result) {
+                            is NetworkResult.Error -> {
+                                _uiState.update {
+                                    it.copy(
+                                        error = result.message,
+                                        isLoading = false
+                                    )
+                                }
+                                //_uiError.send(result.message ?: "Error")
+                            }
+                            is NetworkResult.Loading -> _uiState.update { it.copy(isLoading = true) }
+                            is NetworkResult.Success -> _uiState.update {
+                                it.copy(
+                                    movies = result.data ?: emptyList(), isLoading = false
+                                )
+                            }
                         }
                     }
+            }
+            else {
+                _uiState.update {
+                    it.copy(
+                        error = "no hay internet cargando de cache.",
+                        isLoading = false
+                    )
                 }
-    //                  if (!Utils.hasInternetConnection(appContext))
-    //                      _uiError.send("no hay internet"+ BuildConfig.API_KEY)
-    //                     // _uiState.value = UiState.Failure("no hay internet")
-    //                  else
-    //                      _uiError.send("hay internet")
-    //                      //_uiState.value = UiState.Failure("hay internet")
+            }
+            //                  if (!Utils.hasInternetConnection(appContext))
+            //                      _uiError.send("no hay internet"+ BuildConfig.API_KEY)
+            //                     // _uiState.value = UiState.Failure("no hay internet")
+            //                  else
+            //                      _uiError.send("hay internet")
+            //                      //_uiState.value = UiState.Failure("hay internet")
         }
     }
 

@@ -8,7 +8,7 @@ import com.example.flows.domain.modelo.Movie
 @Entity(tableName = "movie")
 data class MovieEntity(
     @NonNull
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val title: String?,
     val overview: String? = "",

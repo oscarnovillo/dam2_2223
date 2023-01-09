@@ -14,11 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.flows.R
 import com.example.flows.databinding.ActivityMainBinding
-import com.example.flows.domain.modelo.Movie
-import com.example.flows.framework.utils.UiState
-import com.example.flows.framework.utils.successData
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 
@@ -49,12 +45,12 @@ class MainActivity : AppCompatActivity() {
 //                                .show()
 //                            binding.loading.visibility = View.GONE
 //                        }
-                        binding.loading.visibility = if (value.isLoading) View.VISIBLE else View.GONE
-                        movieAdapter.submitList(value.movies)
-                        value.error.let{
-                            Toast.makeText(this@MainActivity, it, Toast.LENGTH_SHORT).show()
-                            viewModel.handleEvent(MainContract.Event.MensajeMostrado)
-                        }
+                    binding.loading.visibility = if (value.isLoading) View.VISIBLE else View.GONE
+                    movieAdapter.submitList(value.movies)
+                    value.error.let {
+                        Toast.makeText(this@MainActivity, it, Toast.LENGTH_SHORT).show()
+                        viewModel.handleEvent(MainContract.Event.MensajeMostrado)
+                    }
 //                    }
                 }
             }
@@ -92,9 +88,10 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
-        when (menuItem.itemId) {
+        return when (menuItem.itemId) {
             R.id.recargar -> {
                 // Handle favorite icon press
+
                 viewModel.handleEvent(MainContract.Event.PedirDatos)
                 true
             }
@@ -104,9 +101,9 @@ class MainActivity : AppCompatActivity() {
                 //findNavController().navigate(R.id.action_blankFragment2_to_blankFragment3)
                 true
             }
-            else -> false
+            else -> super.onOptionsItemSelected(menuItem)
         }
-        return super.onOptionsItemSelected(menuItem)
+        // return super.onOptionsItemSelected(menuItem)
     }
 
 
