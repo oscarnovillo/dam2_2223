@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.guru.composecookbook">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:fullBackupContent="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ComposeCookBook">
+        <activity
+            android:name=".ui.templates.TemplatesActivity"
+            android:label="@string/title_activity_templates"
+            android:theme="@style/Theme.ComposeCookBook.NoActionBar"></activity>
+        <activity
+            android:name=".ui.demoapps.tiktok.TiktokActivity"
+            android:label="@string/title_activity_tiktok"
+            android:theme="@style/Theme.ComposeCookBook.NoActionBar" />
+        <activity
+            android:name=".ui.home.advancelists.AdvanceListsActivity"
+            android:label="@string/title_activity_advance_lists"
+            android:theme="@style/Theme.ComposeCookBook.NoActionBar" />
+        <activity
+            android:name="com.guru.composecookbook.ui.demoapps.datingapp.DatingHomeActivity"
+            android:label="@string/title_activity_dating_home_activitu"
+            android:theme="@style/Theme.ComposeCookBook.NoActionBar" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/test_admob_id" /> <!-- insert your maps api key below to see maps -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="" />
+
+        <activity
+            android:name="com.guru.composecookbook.ui.demoapps.moviesappmvi.ui.details.MovieDetailActivity"
+            android:label="@string/title_activity_movie_detail"
+            android:theme="@style/Theme.ComposeCookBook.NoActionBar" />
+        <activity
+            android:name="com.guru.composecookbook.ui.demoapps.moviesappmvi.ui.home.MoviesHomeActivity"
+            android:label="@string/title_activity_movies_home"
+            android:theme="@style/Theme.ComposeCookBook.NoActionBar" />
+        <activity
+            android:name="com.guru.composecookbook.ui.demoapps.cryptoappmvvm.ui.detail.CryptoDetailActivity"
+            android:label="@string/title_activity_crypto_detail"
+            android:theme="@style/Theme.ComposeCookBook.NoActionBar" />
+        <activity
+            android:name="com.guru.composecookbook.ui.demoapps.cryptoappmvvm.ui.home.CryptoHomeActivity"
+            android:label="@string/title_activity_crypto_home"
+            android:theme="@style/Theme.ComposeCookBook.NoActionBar" />
+        <activity
+            android:name=".ui.demoapps.spotify.details.SpotifyDetailActivity"
+            android:label="@string/title_activity_spotify_detail"
+            android:theme="@style/Theme.ComposeCookBook.NoActionBar" />
+        <activity
+            android:name=".ui.demoapps.spotify.SpotifyActivity"
+            android:label="@string/title_activity_spotify"
+            android:theme="@style/Theme.ComposeCookBook.NoActionBar" />
+        <activity
+            android:name=".ui.demoapps.DemoUIHostActivity"
+            android:label="@string/title_activity_demo_uihost"
+            android:theme="@style/Theme.ComposeCookBook.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.ComposeCookBook.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.home.dialogs.DialogsActivity"
+            android:label="@string/title_activity_dialogs"
+            android:theme="@style/Theme.ComposeCookBook.NoActionBar" />
+        <activity
+            android:name=".ui.home.lists.ListViewActivity"
+            android:label="@string/title_activity_list_view"
+            android:theme="@style/Theme.ComposeCookBook.NoActionBar" />
+        <activity
+            android:name=".ui.home.dynamic.DynamicUIActivity"
+            android:label="@string/title_activity_dynamic_u_i"
+            android:theme="@style/Theme.ComposeCookBook.NoActionBar" />
+    </application>
+
+</manifest>

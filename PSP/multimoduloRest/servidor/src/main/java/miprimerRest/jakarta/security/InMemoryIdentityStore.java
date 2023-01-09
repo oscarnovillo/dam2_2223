@@ -6,6 +6,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.security.enterprise.credential.BasicAuthenticationCredential;
 import jakarta.security.enterprise.credential.Credential;
+import jakarta.security.enterprise.credential.RememberMeCredential;
 import jakarta.security.enterprise.credential.UsernamePasswordCredential;
 import jakarta.security.enterprise.identitystore.CredentialValidationResult;
 import jakarta.security.enterprise.identitystore.IdentityStore;
@@ -38,28 +39,36 @@ public class InMemoryIdentityStore implements IdentityStore {
     public CredentialValidationResult validate(Credential credential) {
 
 
+        switch (credential) {
+            case BasicAuthenticationCredential user -> {
 
-        if (credential instanceof BasicAuthenticationCredential) {
-            BasicAuthenticationCredential user = (BasicAuthenticationCredential)credential;
 
+                HashSet<String> roles = new HashSet<>();
+                roles.add("admin");
+                roles.add("user");
 
-            HashSet<String> roles = new HashSet<>();
-            roles.add("admin");
-            roles.add("user");
+                user.getPassword().getValue();
+                return switch (user.getCaller()) {
+                    case "admin" -> new CredentialValidationResult("admin", Set.of("admin"));// Collections.singleton("ADMIN"));
+                    case "paco" -> new CredentialValidationResult("paco", Collections.singleton("user"));
+                    case "user" -> new CredentialValidationResult("user", Collections.singleton("user"));
+                    case "usuarioSinActivar" -> NOT_VALIDATED_RESULT;
+                    default -> INVALID_RESULT;
+                };
 
-            user.getPassword().getValue();
-            return switch (user.getCaller()) {
-                case "admin" -> new CredentialValidationResult("admin", Set.of("admin"));// Collections.singleton("ADMIN"));
-                case "paco" -> new CredentialValidationResult("paco", Collections.singleton("user"));
-                case "user" -> new CredentialValidationResult("user", Collections.singleton("user"));
-                case "usuarioSinActivar" -> NOT_VALIDATED_RESULT;
-                default -> INVALID_RESULT;
-            };
+            }
+            case RememberMeCredential jwt -> {
 
+                jwt.getToken();
+
+            }
+
+            default -> throw new IllegalStateException("Unexpected value: " + credential);
         }
 
 
         return INVALID_RESULT;
+
     }
 
 }

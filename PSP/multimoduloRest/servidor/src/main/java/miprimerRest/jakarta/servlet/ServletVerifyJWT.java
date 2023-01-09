@@ -36,6 +36,8 @@ public class ServletVerifyJWT extends HttpServlet {
                 .build()
                 .parseClaimsJws(auth);
 
+
+
        response.getWriter().println(jws.getBody().get("user"));
     }
 

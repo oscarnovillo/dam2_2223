@@ -1,6 +1,6 @@
 query FirstQuery {
 
-    characters{
+    characters(page:2){
         results{
             name
         }
