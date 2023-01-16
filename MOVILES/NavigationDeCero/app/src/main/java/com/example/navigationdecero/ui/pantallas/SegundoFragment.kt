@@ -14,7 +14,7 @@ import com.example.navigationdecero.R
 import com.example.navigationdecero.databinding.FragmentSegundoBinding
 
 
-class SegundoFragment : Fragment() {
+class SegundoFragment : Fragment(),MenuProvider {
 
     private var _binding : FragmentSegundoBinding? = null
     private val binding get() = _binding!!
@@ -38,49 +38,49 @@ class SegundoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val menuHost: MenuHost = requireActivity()
-//        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
 
     //menuprovider
-//    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-//        //menuInflater.inflate(R.menu.menu_segundo_fragment, menu)
-//
-//        val actionSearch = menu.findItem(R.id.search).actionView as SearchView
-//
-//        actionSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(p0: String?): Boolean {
-//                return false
-//            }
-//
-//            override fun onQueryTextChange(newText: String?): Boolean {
-//
-//                newText?.let {
-//                    binding.texto.setText(newText)
-//                }
-//
-//                return false
-//            }
-//
-//
-//        })
-//    }
-//
-//    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-//        return when (menuItem.itemId) {
-//            R.id.primerFragment -> {
-//                val action = SegundoFragmentDirections.actionSegundoFragmentToPrimerFragment(binding.texto.text.toString())
-//                findNavController().navigate(action)
-//                true
-//            }
-//            R.id.otroTercerFragment -> {
-//                val action = SegundoFragmentDirections.meVoyDeSegundoATercero(binding.texto.text.toString())
-//                findNavController().navigate(action)
-//               // findNavController().navigate(R.id.action_segundoFragment_to_primerFragment)
-//                true
-//            }
-//            else -> false
-//        }
-//    }
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.menu_segundo_fragment, menu)
+
+        val actionSearch = menu.findItem(R.id.search).actionView as SearchView
+
+        actionSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                newText?.let {
+                    binding.texto.setText(newText)
+                }
+
+                return false
+            }
+
+
+        })
+    }
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
+            R.id.primerFragment -> {
+                val action = SegundoFragmentDirections.actionSegundoFragmentToPrimerFragment(binding.texto.text.toString())
+                findNavController().navigate(action)
+                true
+            }
+            R.id.otroTercerFragment -> {
+                val action = SegundoFragmentDirections.meVoyDeSegundoATercero(binding.texto.text.toString())
+                findNavController().navigate(action)
+               // findNavController().navigate(R.id.action_segundoFragment_to_primerFragment)
+                true
+            }
+            else -> false
+        }
+    }
 }

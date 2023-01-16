@@ -3,6 +3,7 @@ package com.example.navigationdecero.ui.pantallas
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -44,38 +45,25 @@ class MainActivity : AppCompatActivity() {
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)
 
+
+
             topAppBar.setNavigationOnClickListener {
                 Log.i("TAG",navController.currentDestination?.id.toString() ?: "null" )
+
+                navController.navigateUp()
                 drawerLayout.open()
             }
 
-            topAppBar.setOnMenuItemClickListener { menuItem ->
-                 when (menuItem.itemId) {
-                    R.id.segundoFragment -> {
-                        // Handle favorite icon press
-                        menuItem.onNavDestinationSelected(navController)
-                        true
-                    }
-                    R.id.tercerFragment -> {
-                        // Handle search icon press
-                        val action = SegundoFragmentDirections.meVoyDeSegundoATercero("desde primero")
-                        navController.navigate(action)
-                        true
-                    }
-                    R.id.search -> {
-                        // Handle search icon press
-                        true
-                    }
-                    else -> false
-                }
-            }
+//            topAppBar.setOnMenuItemClickListener { menuItem ->
+//
+//            }
 
 
-            topAppBar.navigationIcon = getDrawable(R.drawable.ic_baseline_menu_24)
+            //topAppBar.navigationIcon = getDrawable(R.drawable.ic_baseline_menu_24)
 
             navController.addOnDestinationChangedListener { _, destination, arguments ->
-                topAppBar.isVisible = arguments?.getBoolean("ShowAppBar", false) == true
-                topAppBar.navigationIcon = getDrawable(R.drawable.ic_baseline_menu_24)
+                topAppBar.isVisible = arguments?.getBoolean("ShowAppBar", true) == true
+                //topAppBar.navigationIcon = getDrawable(R.drawable.ic_baseline_menu_24)
 
                 when (destination.id){
                     R.id.segundoFragment -> {
@@ -97,6 +85,27 @@ class MainActivity : AppCompatActivity() {
             //topAppBar.visibility = android.view.View.GONE
 
 
+        }
+    }
+
+    override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
+            R.id.segundoFragment -> {
+                // Handle favorite icon press
+                menuItem.onNavDestinationSelected(navController)
+                true
+            }
+            R.id.tercerFragment -> {
+                // Handle search icon press
+                val action = PrimerFragmentDirections.actionPrimerFragmentToTercerFragment("desde primero")
+                navController.navigate(action)
+                true
+            }
+            R.id.search -> {
+                // Handle search icon press
+                true
+            }
+            else -> false
         }
     }
 }

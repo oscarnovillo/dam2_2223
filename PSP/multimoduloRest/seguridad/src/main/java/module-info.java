@@ -1,4 +1,5 @@
 module seguridad {
+    requires com.google.common;
 //    requires jakarta.cdi;
 
     exports org.example.seguridad;

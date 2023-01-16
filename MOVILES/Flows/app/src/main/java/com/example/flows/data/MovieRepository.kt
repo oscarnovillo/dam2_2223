@@ -31,7 +31,7 @@ class MovieRepository @Inject constructor(
             emit(fetchTrendingMoviesCached())
             emit(NetworkResult.Loading())
             val result = movieRemoteDataSource.fetchTrendingMovies()
-
+            emit(result)
             //Cache to database if response is successful
             if (result is NetworkResult.Success) {
                 result.data?.let { it ->
@@ -39,7 +39,7 @@ class MovieRepository @Inject constructor(
                     movieDao.insertAll(it.map{ it.toMovieEntity()})
                 }
             }
-            emit(result)
+
         }.flowOn(Dispatchers.IO)
     }
 

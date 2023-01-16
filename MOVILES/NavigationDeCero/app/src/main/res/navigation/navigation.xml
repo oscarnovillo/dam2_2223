@@ -22,7 +22,7 @@
             app:nullable="true" />
         <argument
             android:name="ShowAppBar"
-            android:defaultValue="true" />
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/segundoFragment"
@@ -49,4 +49,7 @@
             app:argType="string"
             app:nullable="true" />
     </fragment>
+    <argument
+        android:name="ShowAppBar"
+        android:defaultValue="true" />
 </navigation>
