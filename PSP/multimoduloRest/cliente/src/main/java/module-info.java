@@ -19,6 +19,11 @@ module cliente {
     requires io.reactivex.rxjava3;
     requires jjwt.api;
     requires com.google.gson;
+    requires org.bouncycastle.provider;
+    requires java.naming;
+    requires java.logging;
+    requires com.google.common;
+    requires org.bouncycastle.pkix;
 
     exports cliente.ui;
     exports cliente.data;
