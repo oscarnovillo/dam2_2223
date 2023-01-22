@@ -66,6 +66,7 @@ class MainViewModel @Inject constructor(
                                     movies = result.data ?: emptyList(), isLoading = false
                                 )
                             }
+
                         }
                     }
             }
