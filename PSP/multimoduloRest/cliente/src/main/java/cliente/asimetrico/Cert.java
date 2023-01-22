@@ -61,7 +61,7 @@ public class Cert {
                 BigInteger.valueOf(1),
                 new Date(),
                 new Date(System.currentTimeMillis()+1000000),
-                owner, new SubjectPublicKeyInfo(
+                owner, SubjectPublicKeyInfo.getInstance(
                 ASN1Sequence.getInstance(clavesRSA.getPublic().getEncoded()))
 
         );
