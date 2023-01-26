@@ -44,6 +44,7 @@ public class EncriptacionAES implements Encriptacion {
             return Base64.getUrlEncoder().encodeToString(Bytes.concat(iv,salt,
                     cipher.doFinal(strToEncrypt.getBytes(StandardCharsets.UTF_8))));
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Error while encrypting: " + e.toString());
         }
         return null;

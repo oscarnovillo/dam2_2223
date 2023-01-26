@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 public class SignTest {
        public static void main(String[] args) throws FileNotFoundException {
 
-        String nombre = "albertoastudillo";
+        String nombre = "tomas";
         try {
             // Anadir provider JCE (provider por defecto no soporta RSA)
             // Security.addProvider(new BouncyCastleProvider());  // Cargar el provider BC
@@ -72,11 +72,11 @@ public class SignTest {
 
             Signature sign = Signature.getInstance("SHA256WithRSA");
             sign.initSign(clavePrivada2);
-            sign.update("hola".getBytes());
+            sign.update("contenIdo".getBytes());
             byte[] firma = sign.sign();
 
             sign.initVerify(clavePublica2);
-            sign.update("hola".getBytes());
+            sign.update("contenido".getBytes());
             System.out.println(sign.verify(firma));
 
         } catch (Exception ex) {

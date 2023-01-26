@@ -34,7 +34,7 @@ public class CifrarRSAFicheros {
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        String nombre = "albertoastudillo";
+        String nombre = "tomas";
         try {
             // Anadir provider JCE (provider por defecto no soporta RSA)
             //Security.addProvider(new BouncyCastleProvider());  // Cargar el provider BC

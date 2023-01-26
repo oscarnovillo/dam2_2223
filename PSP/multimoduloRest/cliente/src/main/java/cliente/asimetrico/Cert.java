@@ -56,19 +56,22 @@ public class Cert {
 
         // crear un certificado con CErtificateBuilder
         X500Name owner = new X500Name("CN=Oscar");
+        X500Name issuer = new X500Name("CN=Servidor");
         X509v3CertificateBuilder certGen = new X509v3CertificateBuilder(
-                owner,
+                issuer,
                 BigInteger.valueOf(1),
                 new Date(),
                 new Date(System.currentTimeMillis()+1000000),
                 owner, SubjectPublicKeyInfo.getInstance(
-                ASN1Sequence.getInstance(clavesRSA.getPublic().getEncoded()))
+                ASN1Sequence.getInstance(clavePublica.getEncoded()))
 
         );
 
         ContentSigner signer = new JcaContentSignerBuilder("SHA256WithRSAEncryption").build(clavePrivada);
         X509CertificateHolder certHolder = certGen.build(signer);
         X509Certificate cert3 = new JcaX509CertificateConverter().getCertificate(certHolder);
+
+
         cert3.verify(clavesRSA.getPublic());
 
 
@@ -150,9 +153,14 @@ public class Cert {
 
             PrivateKey pk = clavesRSA.getPrivate();
             PublicKey publicKey = clavesRSA.getPublic();
-            System.out.println(cert.getIssuerX500Principal());
+
+            System.out.println("********************************************************");
+            System.out.println(cert3.getIssuerX500Principal());
+            System.out.println(cert3.getSubjectX500Principal());
 
             String dn = cert.getSubjectX500Principal().getName();
+
+            System.out.println("********************************************************");
 
             LdapName ldapDN = new LdapName(dn);
             for (Rdn rdn : ldapDN.getRdns()) {
@@ -173,6 +181,7 @@ public class Cert {
             ks.load(null, null);
             ks.setCertificateEntry("publica", cert);
             ks.setKeyEntry("privada", pk, password, new Certificate[]{cert});
+            ks.setKeyEntry("privada2", pk, password, new Certificate[]{cert});
             FileOutputStream fos = new FileOutputStream("keystore.pfx");
             ks.store(fos, password);
             fos.close();
@@ -203,12 +212,12 @@ public class Cert {
             clavesRSA = new KeyPair(certLoad.getPublicKey(), keyLoad);
 
             Cipher cifrador = Cipher.getInstance("RSA");
-            cifrador.init(Cipher.ENCRYPT_MODE, clavesRSA.getPrivate());
+            cifrador.init(Cipher.ENCRYPT_MODE, keyLoad);
             cifrador.doFinal("hola".getBytes());
 
             Signature sign = Signature.getInstance("SHA256WithRSA");
 
-            sign.initSign(clavesRSA.getPrivate());
+            sign.initSign(keyLoad);
 
             MessageDigest hash = MessageDigest.getInstance("SHA-512");
 
