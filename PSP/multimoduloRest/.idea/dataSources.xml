@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:mysql://informatica.iesquevedo.es:3333</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="@informatica.iesquevedo.es" uuid="0e647423-835d-4027-a304-94b5de9a5ae1">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://informatica.iesquevedo.es:3335</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

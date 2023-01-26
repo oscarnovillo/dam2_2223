@@ -39,9 +39,7 @@ public class InMemoryIdentityStore implements IdentityStore {
     public CredentialValidationResult validate(Credential credential) {
 
 
-        switch (credential) {
-            case BasicAuthenticationCredential user -> {
-
+        if (credential instanceof BasicAuthenticationCredential user) {
 
                 HashSet<String> roles = new HashSet<>();
                 roles.add("admin");
@@ -57,13 +55,11 @@ public class InMemoryIdentityStore implements IdentityStore {
                 };
 
             }
-            case RememberMeCredential jwt -> {
-
+        else if (credential instanceof RememberMeCredential jwt) {
                 jwt.getToken();
 
             }
-
-            default -> throw new IllegalStateException("Unexpected value: " + credential);
+        else { throw new IllegalStateException("Unexpected value: " + credential);
         }
 
 
