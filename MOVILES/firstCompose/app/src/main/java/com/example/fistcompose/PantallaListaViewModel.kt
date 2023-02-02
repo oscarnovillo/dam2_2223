@@ -5,6 +5,7 @@ import com.example.fistcompose.data.ListaRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -14,15 +15,15 @@ class PantallaListaViewModel  @Inject constructor(
 
     val listado = repository.getData()
 
-    val _text = MutableStateFlow<String>("")
-    val text : StateFlow<String> = _text
+    private val _text = MutableStateFlow("")
+    val text : StateFlow<String> = _text.asStateFlow()
 
 
 
 
     fun changeText(texto: String)
     {
-
+        _text.value = texto
     }
 
 }

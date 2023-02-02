@@ -166,45 +166,45 @@ fun PrimerBox() {
             name = stringResource(R.string.ivan),
             modifier = Modifier.align(Alignment.BottomEnd)
         )
-//        Row(
-//            modifier = Modifier.fillMaxWidth(),
-//            horizontalArrangement = Arrangement.SpaceEvenly
-//        ) {
-//
-//            val scope = rememberCoroutineScope()
-//
-//            Icon(
-//
-//                imageVector = Icons.TwoTone.Earbuds,
-//                contentDescription = null,
-//                modifier = Modifier
-//                    .size(200.dp)
-//                    .clickable {
-//
-//                        context.startActivity(Intent(context, MainActivity2::class.java))
-//
-//                    },
-//                tint = MaterialTheme.colors.primary,
-//
-//                )
-//            Icon(
-//                painter = painterResource(id = R.drawable.ic_baseline_ac_unit_24),
-//                contentDescription = null,
-//                modifier = Modifier
-//                    .size(200.dp)
-//                    .clickable {
-//                        scope.launch {
-//                            snackbarHostState.showSnackbar("Hello")
-//                        }
-//                        Toast
-//                            .makeText(context, "TOAST", Toast.LENGTH_SHORT)
-//                            .show()
-//
-//                    },
-//
-//                tint = MaterialTheme.colors.primary,
-//            )
-//        }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+
+            val scope = rememberCoroutineScope()
+
+            Icon(
+
+                imageVector = Icons.TwoTone.Earbuds,
+                contentDescription = null,
+                modifier = Modifier
+                    .size(200.dp)
+                    .clickable {
+
+                        context.startActivity(Intent(context, MainActivity2::class.java))
+
+                    },
+                tint = MaterialTheme.colors.primary,
+
+                )
+            Icon(
+                painter = painterResource(id = R.drawable.ic_baseline_ac_unit_24),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(200.dp)
+                    .clickable {
+                        scope.launch {
+                            snackbarHostState.showSnackbar("Hello")
+                        }
+                        Toast
+                            .makeText(context, "TOAST", Toast.LENGTH_SHORT)
+                            .show()
+
+                    },
+
+                tint = MaterialTheme.colors.primary,
+            )
+        }
         SnackbarHost(
             hostState = snackbarHostState,
             modifier = Modifier.align(Alignment.BottomEnd)
