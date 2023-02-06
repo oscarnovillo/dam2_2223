@@ -6,4 +6,5 @@
 
     <dimen name="padding_xsmall">2dp</dimen>
     <dimen name="padding_medium">16dp</dimen>
+    <dimen name="padding_card">5.dp</dimen>
 </resources>

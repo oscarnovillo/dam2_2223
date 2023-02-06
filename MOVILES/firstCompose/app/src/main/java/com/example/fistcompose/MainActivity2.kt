@@ -18,10 +18,12 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -29,6 +31,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.fistcompose.ui.theme.FistComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
+import kotlinx.coroutines.flow.stateIn
 
 @AndroidEntryPoint
 class MainActivity2 : ComponentActivity() {
@@ -86,7 +90,7 @@ fun Navigation() {
             )
         ) {
             PantallaDetalle(
-                id = it.arguments?.get("todoId") as Int,
+                id = it.arguments?.getInt("todoId") ?: 0 ,
                 onPopBackStack = {
                     navController.popBackStack()
                 })
@@ -128,7 +132,7 @@ fun PantallaLista(
     onNavigate: (Int) -> Unit,
 ) {
     val texto  = viewModel.text.collectAsState()
-    val listadoData = viewModel.listado.collectAsState(initial = emptyList())
+    val listadoData = viewModel.listado.collectAsStateWithLifecycle(initialValue = emptyList())
 
     Column(modifier = Modifier.fillMaxWidth()) {
 
@@ -164,7 +168,7 @@ fun PantallaLista(
                     .clickable {
                         onNavigate(data.id)
                     }
-                    .padding(5.dp)
+                    .padding(dimensionResource(id = R.dimen.padding_card))
 
                 ) {
 
