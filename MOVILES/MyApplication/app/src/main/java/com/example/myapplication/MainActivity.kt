@@ -23,7 +23,7 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+//import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.myapplication.ui.common.DrawerContent
 import com.example.myapplication.ui.common.MiBottomBar
 import com.example.myapplication.ui.common.MiTopAppBar
@@ -57,7 +57,7 @@ fun PantallaHome(
 ) {
     val context = LocalContext.current
 
-    val state by pantallaViewModel.state.collectAsStateWithLifecycle()
+    val state by pantallaViewModel.state.collectAsState()
 
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
@@ -98,50 +98,58 @@ fun PantallaHome(
                 scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
                 scaffoldState.snackbarHostState.showSnackbar(error)
                 pantallaViewModel.limpiaError()
+
             }
         }
+        if (state.isLoading) {
 
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .background(MaterialTheme.colors.background)
-                .border(1.dp, MaterialTheme.colors.primary),
-            contentAlignment = Alignment.Center
-        ) {
-            Column(
+            CircularProgressIndicator()
+        } else {
+            Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(dimensionResource(id = R.dimen.activity_horizontal_margin))
-                    .background(Color.White)
-                    .border(1.dp, MaterialTheme.colors.primary)
+                    .padding(paddingValues)
+                    .background(MaterialTheme.colors.background)
+                    .border(
+                        dimensionResource(id = R.dimen.unpoquito),
+                        MaterialTheme.colors.primary
+                    ),
+                contentAlignment = Alignment.Center
             ) {
-                Text(
-                    text = stringResource(R.string.Hola) + " $name!",
-                    style = MaterialTheme.typography.button,
+                Column(
                     modifier = Modifier
-                        .align(Alignment.CenterHorizontally)
-                        .clickable { pantallaViewModel.changeNumber(state.numero + 1) }
+                        .fillMaxSize()
+                        .padding(dimensionResource(id = R.dimen.activity_horizontal_margin))
+                        .background(Color.White)
+                        .border(1.dp, MaterialTheme.colors.primary)
+                ) {
+                    Text(
+                        text = stringResource(R.string.Hola) + " $name!",
+                        style = MaterialTheme.typography.button,
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                            .clickable { pantallaViewModel.changeNumber(state.numero + 1) }
 
-                )
-                PutaCaja(
-                    texto = state.persona.nombre,
-                    onNombreChange = pantallaViewModel::changeText,
-                )
-                Button(
-                    modifier = Modifier
-                        .align(Alignment.Start),
-                    onClick = {
-                        pantallaViewModel.provocaError()
-                        pantallaViewModel.changeNumber(state.numero + 1)
-                        Toast.makeText(
-                            context,
-                            context.resources.getString(R.string.Hola) + "${state.numero} ${state.error}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }) {
+                    )
+                    PutaCaja(
+                        texto = state.persona.nombre,
+                        onNombreChange = pantallaViewModel::changeText,
+                    )
+                    Button(
+                        modifier = Modifier
+                            .align(Alignment.Start),
+                        onClick = {
+                            pantallaViewModel.provocaError()
+                            pantallaViewModel.changeNumber(state.numero + 1)
+                            Toast.makeText(
+                                context,
+                                context.resources.getString(R.string.Hola) + "${state.numero} ${state.error}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }) {
 
-                    Text(text = stringResource(id = R.string.Hola))
+                        Text(text = stringResource(id = R.string.Hola))
+                    }
                 }
             }
         }
@@ -153,7 +161,8 @@ fun PantallaHome(
 fun PutaCaja(
     texto: String,
     onNombreChange: (String) -> Unit,
-) {
+
+    ) {
     TextField(
         value = texto,
         onValueChange = onNombreChange,
