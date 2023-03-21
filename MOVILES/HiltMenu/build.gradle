@@ -2,7 +2,8 @@
 buildscript {
     ext {
         room_version = '2.4.3'
-
+        localProperties = new Properties()
+        localProperties.load(new FileInputStream(rootProject.file("local.properties")))
     }
     repositories {
         google()
@@ -11,13 +12,16 @@ buildscript {
     dependencies {
         // para los plugins
         classpath 'com.android.tools.build:gradle:7.3.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.20"
-        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.42'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0"
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.44'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
+
+
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir

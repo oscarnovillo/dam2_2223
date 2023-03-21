@@ -60,11 +60,27 @@ fun Navigation() {
         navController = navController,
         startDestination = Routes.LISTADO,
     ) {
+        val bottomNavigation = @Composable {
+            BottomNavigation(
+                navController = navController,
+                onNavigate = {
+                    navController.navigate(it)
+                }
+            )
+        }
         composable(
             route = Routes.LISTADO
         ) {
             PantallaLista(
                 text = "1",
+                BotomNavigation = {
+                    BottomNavigation(
+                        navController = navController,
+                        onNavigate = {
+                            navController.navigate(it)
+                        }
+                    )
+                },
                 onNavigate = { id ->
                     navController.navigate(Routes.DETALLE + "?todoId=${id}")
                 }
@@ -129,6 +145,7 @@ fun cambiaTexto( nombre:String, pass:String){
 fun PantallaLista(
     viewModel: PantallaListaViewModel = hiltViewModel(),
     text: String,
+    BottomNavigation: @Composable () -> Unit = { },
     onNavigate: (Int) -> Unit,
 ) {
     val texto  = viewModel.text.collectAsState()
