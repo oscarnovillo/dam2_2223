@@ -12,6 +12,7 @@ public class PostDao {
         this.posts = posts;
     }
 
+
     public List<Post> getRecentPosts(int count, int offset) {
         return posts.stream()
           .skip(offset)

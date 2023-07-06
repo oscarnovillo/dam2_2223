@@ -8,6 +8,9 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.hiltmenu.BuildConfig
+
+
 import com.example.hiltmenu.R
 import com.example.hiltmenu.databinding.ActivityMainBinding
 import com.example.hiltmenu.data.PersonaRepository
@@ -21,6 +24,7 @@ import com.example.hiltmenu.usecases.personas.InsertPersona
 import com.example.hiltmenu.usecases.personas.InsertPersonaWithCosas
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import java.io.Serializable
 import java.time.LocalDate
 
@@ -66,6 +70,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Timber.i(BuildConfig.API_BASE)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

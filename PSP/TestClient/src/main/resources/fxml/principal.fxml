@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.ui.principal.PrincipalController">
+   <children>
+      <ListView fx:id="list" layoutX="83.0" layoutY="68.0" prefHeight="200.0" prefWidth="200.0" />
+      <Button layoutX="307.0" layoutY="76.0" mnemonicParsing="false" onAction="#cargar" text="cargar" />
+      <Label fx:id="cargando" layoutX="343.0" layoutY="151.0" text="Cargando" />
+   </children>
+</AnchorPane>

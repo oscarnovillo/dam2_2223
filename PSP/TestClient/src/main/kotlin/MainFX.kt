@@ -11,9 +11,6 @@ import javafx.scene.layout.AnchorPane
 
 
 class MainFX  : Application() {
-
-
-
     override fun start(primaryStage: Stage?) {
         try{
         var  loaderMenu: FXMLLoader? = FXMLLoader(
