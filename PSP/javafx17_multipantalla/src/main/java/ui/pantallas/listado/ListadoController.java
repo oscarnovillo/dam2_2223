@@ -6,6 +6,7 @@ import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.MFXTableView;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.vavr.control.Either;
@@ -24,6 +25,7 @@ import ui.pantallas.common.BasePantallaController;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class ListadoController extends BasePantallaController {
 
@@ -51,12 +53,12 @@ public class ListadoController extends BasePantallaController {
 
     @FXML
     private void ver(ActionEvent actionEvent) {
-        //asyncConTask();
+        asyncConCompletableFuture();
 //        //getPrincipalController().sacarAlertError("ahora con single");
         //      asynConSingle();
 
         getPrincipalController().root.setCursor(Cursor.WAIT);
-        viewModel.llamadaRetrofitAsyncEnViewModel();
+//        viewModel.llamadaRetrofitAsyncEnViewModel();
 
     }
 
@@ -113,6 +115,56 @@ public class ListadoController extends BasePantallaController {
 
         new Thread(task).start();
     }
+
+
+    private void asyncConCompletableFuture() {
+
+        getPrincipalController().root.setCursor(Cursor.WAIT);
+
+        CompletableFuture.supplyAsync(viewModel::llamadaRetrofitAsyncEnUi)
+                .exceptionally(throwable -> Either.left(throwable.getMessage()))
+                .thenAcceptAsync(result ->
+                    //Platform.runLater(() -> {
+                        {getPrincipalController().root.setCursor(Cursor.DEFAULT);
+                        result.peek(cromos -> {
+                            tabla.getItems().clear();
+                            tabla.getItems().addAll(cromos);
+
+
+                        }).peekLeft(error -> {
+                            getPrincipalController().sacarAlertError(error);
+                        });}
+                    //})
+            );
+
+//        var task = new Task<Either<String, List<Cromo>>>() {
+//            @Override
+//            protected Either<String, List<Cromo>> call() throws Exception {
+//                return viewModel.llamadaRetrofitAsyncEnUi();
+//            }
+//        };
+//        task.setOnSucceeded(workerStateEvent -> {
+//            //workerStateEvent.getSource().valueProperty().get()
+//            getPrincipalController().root.setCursor(Cursor.DEFAULT);
+//            var result = task.getValue();
+//            result.peek(cromos -> {
+//                tabla.getItems().clear();
+//                tabla.getItems().addAll(cromos);
+//
+//
+//            }).peekLeft(error -> {
+//                getPrincipalController().sacarAlertError(error);
+//            });
+//        });
+//        task.setOnFailed(workerStateEvent -> {
+//            //workerStateEvent.getSource().getException().getMessage()
+//            getPrincipalController().sacarAlertError(task.getException().getMessage());
+//            getPrincipalController().root.setCursor(Cursor.DEFAULT);
+//        });
+//
+//        new Thread(task).start();
+    }
+
 
     public void initialize() {
 // tabla materialFX

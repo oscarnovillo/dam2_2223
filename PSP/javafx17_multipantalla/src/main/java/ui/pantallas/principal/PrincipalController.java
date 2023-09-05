@@ -222,7 +222,7 @@ public class PrincipalController {
 
     @FXML
     private void cambiarcss(ActionEvent actionEvent) {
-        System.out.println(primaryStage.getScene().getRoot().getStylesheets().stream().findFirst().get());
+        System.out.println(primaryStage.getScene().getRoot().getStylesheets().stream().findFirst().orElseGet(() ->"no encontrado"));
 
 
         primaryStage.getScene().getRoot().getStylesheets().clear();
