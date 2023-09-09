@@ -80,9 +80,7 @@ public class PrincipalController {
 //
 //                cambioPantalla(pantallaBienvenida);
 //                break;
-            default:
-                cambioPantalla(cargarPantalla(pantalla.getRuta()));
-                break;
+            default -> cambioPantalla(cargarPantalla(pantalla.getRuta()));
         }
     }
 
